@@ -1,42 +1,32 @@
+<!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>计算器</title>
 </head>
-<body bgcolor= "#000000" text= "gold">
-<form name="计算器" >
-<input type="button" value="1" onClick="document.calculator.ans.
-value+='1'">
-<input type="button" value="2" onClick="document.calculator.ans.
-value+='2'">
-<input type="button" value="3" onClick="document.calculator.ans.
-value+='3'">
-<input type="button" value="4" onClick="document.calculator.ans.
-value+='4'">
-<input type="button" value="5" onClick="document.calculator.ans.
-value+='5'">
-<input type="button" value="6" onClick="document.calculator.ans.
-value+='6'">
-<input type="button" value="7" onClick="document.calculator.ans.
-value+='7'">
-<input type="button" value="8" onClick="document.calculator.ans.
-value+='8'">
-<input type="button" value="9" onClick="document.calculator.ans.
-value+='9'">
-<input type="button" value="-" onClick="document.calculator.ans.
-value+='-'">
-<input type="button" value="+" onClick="document.calculator.ans.
-value+='+'">
-<input type="button" value="*" onClick="document.calculator.ans.
-value+='*'">
-<input type="button" value="/" onClick="document.calculator.ans.
-value+='/'">
+<body>
 
-<input type="button" value="0" onClick="document.calculator.ans.
-value+='0'">
-<input type="reset" value="Reset">
-<input type="button" value="=" onClick="document.calculator.ans.
-value=eval(document.calculator.ans.value)">
-<br>答案 <input type="textfield" name="ans" value="">
-</form>
+<form class="kuang" name="kuang" >
+        <input type="text" class="result"  name="result">
+         <div class="anniu">
+           <span onclick="kuang.result.value+='7'">7</span>
+           <span onclick="kuang.result.value+='8'">8</span>
+           <span onclick="kuang.result.value+='9'">9</span>
+           <span onclick="kuang.result.value+='+'">+</span>
+           <span onclick="kuang.result.value+='4'">4</span>
+           <span onclick="kuang.result.value+='5'">5</span>
+           <span onclick="kuang.result.value+='6'">6</span>
+           <span onclick="kuang.result.value+='-'">-</span>
+           <span onclick="kuang.result.value+='1'">1</span>
+           <span onclick="kuang.result.value+='2'">2</span>
+           <span onclick="kuang.result.value+='3'">3</span>
+           <span onclick="kuang.result.value+='*'">*</span>
+           <span onclick="kuang.result.value+='0'">0</span>
+           <span onclick="kuang.result.value+='.'">.</span>
+           <span onclick="kuang.result.value+='/'">/</span>
+           <span onclick="kuang.result.value=eval(kuang.result.value)">=</span>
+         </div>
+         <div class="zero" onclick="kuang.result.value=''">I'll clear it (一键清空)</div>
+
 </body>
 </html>
