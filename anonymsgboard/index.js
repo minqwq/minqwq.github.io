@@ -13,7 +13,7 @@ app.use(session({
 // 有了這個才能透過 req.body 取東西
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.set('view engine', 'html');
+app.set('view engine', 'ejs');
 
 // 首頁，直接輸出所有留言
 app.get('/', function (req, res) {
