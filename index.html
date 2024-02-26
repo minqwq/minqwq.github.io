@@ -190,6 +190,22 @@ clickEffect();//调用特效函数
 <p>该网站累计被访问次数</p><img src="http://count.himiku.com/get/@minqwq?theme=rule34" alt="moecounter" />
 <p><font color="red">祝贺该网站index.html行数突破200行！！！(点击特效占了100多行)</font></p>
 <hr></hr>
+<h2>Hitokoto -- 一言</h2>
+<p id="hitokoto">
+  <a href="#" id="hitokoto_text">:D 获取中...</a>
+</p>
+<script>
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      const hitokoto = document.querySelector('#hitokoto_text')
+      hitokoto.href = `https://hitokoto.cn/?uuid=${data.uuid}`
+      hitokoto.innerText = data.hitokoto
+    })
+    .catch(console.error)
+</script>
+<p><font color="grey"><small><i>一言 API 不支持 Internet Explorer 所有版本</i></small></font></p>
+<hr></hr>
 <h2>在网上搜索</h2>
 <form action="http://cn.bing.com/search" method="get" style="white-space: nowrap">
 <div>
