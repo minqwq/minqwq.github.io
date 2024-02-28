@@ -1,4 +1,5 @@
 <!--可以用该网页作为学习用途使用，不允许复制粘贴后当作你自己的网站--!>
+<!--不要把COPY AND PASTE里面的内容一起作为学习用途使用，这些不是我写的--!>
 <!DOCTYPE html>
 <html>
 <head>
@@ -352,10 +353,48 @@ clickEffect();//调用特效函数
 	    }
     }
 </script>
+<!--WHITE BLACK ALTERNATE--!>
+<script>
+function blinklink() {
+    if (!document.getElementById('blinkwhite').style.color) {
+        document.getElementById('blinkwhite').style.color = "black";
+    }
+    if (document.getElementById('blinkwhite').style.color == "black") {
+        document.getElementById('blinkwhite').style.color = "#FFFFFF";
+    } else {
+        document.getElementById('blinkwhite').style.color = "black";
+    }
+    timer = setTimeout("blinklink()", 500);
+}
+function stoptimer() {
+    clearTimeout(timer);
+} 
+blinklink()
+</script>
+<!--WHITE BLACK ALTERNATE--!>
+<!--RED BLACK ALTERNATE--!>
+<script type = "text/javascript" >
+function blinklink() {
+    if (!document.getElementById('blinkred').style.color) {
+        document.getElementById('blinkred').style.color = "red";
+    }
+    if (document.getElementById('blinkred').style.color == "red") {
+        document.getElementById('blinkred').style.color = "#FFFFFF";
+    } else {
+        document.getElementById('blinkred').style.color = "red";
+    }
+    timer = setTimeout("blinklink()", 500);
+}
+function stoptimer() {
+    clearTimeout(timer);
+} 
+blinklink()
+</script>
+<!--RED BLACK ALTERNATE--!>
 <!--END OF COPY AND PASTE--!>
 <!--BEGIN OF WEBSITE BODY--!>
 <noscript>
-<h2><font color="red">无法使用 JavaScript</h2>
+<span id="blinkred"><h2><font color="red">无法使用 JavaScript</h2></span>
 <li>未启用或无法使用 JavaScript ，所有特效以及部分按钮将无法工作</font></li>
 <li>Q:如何启用？│A:浏览器设置>>>网页设置/设定>>>JavaScript 并启用该选项即可</li>
 <hr></hr>
