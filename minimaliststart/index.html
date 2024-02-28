@@ -10,14 +10,14 @@
 <p align="right">做一个真正简单的开始页。 --minqwq</p>
 <style>
 #clock{
-    margin:100px auto;
+    margin: 0px;
     border: 0px;
     width: 400px;
-    height: 100px;
+    height: 10px;
     line-height: 100px;
     text-align: center;
-    font: bold;
-    color: red;
+    font: regular;
+    color: #00FF00;
 }
 </style>
 <script>
@@ -32,8 +32,8 @@ function showTime(clock){
     month = month+1;
     var arr_work = new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
     var week = arr_work[ now.getDay()];
-    var time = year+"年"+month+"月"+day+"日 "+ week+" "+hour+":"+minu+":"+second;
-    clock.innerHTML="当前时间: "+time;
+    var time = year+"年"+month+"月"+day+"日 "+ week+" "+hour+"时"+minu+"分"+second;
+    clock.innerHTML=""+time;
 }
 window.onload = function(){
     var clock = document.getElementById("clock");
