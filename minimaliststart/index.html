@@ -8,6 +8,40 @@
 
 <h2 align="center">Minimalist Start</h2>
 <p align="right">做一个真正简单的开始页。 --minqwq</p>
+<style>
+#clock{
+    margin:100px auto;
+    border: 0px;
+    width: 400px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    font: bold;
+    color: red;
+}
+</style>
+<script>
+function showTime(clock){
+    var now = new Date();
+    var year = now.getFullYear();
+    var month= now.getMonth();
+    var day = now.getDate();
+    var hour = now.getHours();
+    var minu = now.getMinutes();
+    var second = now.getSeconds();
+    month = month+1;
+    var arr_work = new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+    var week = arr_work[ now.getDay()];
+    var time = year+"年"+month+"月"+day+"日 "+ week+" "+hour+":"+minu+":"+second;
+    clock.innerHTML="当前时间: "+time;
+}
+window.onload = function(){
+    var clock = document.getElementById("clock");
+    window.setInterval("showTime(clock)",1000);
+  
+}
+</script>
+<div id ="clock"></div>
 <hr></hr>
 <form action="http://cn.bing.com/search" method="get" style="white-space: nowrap">
 <div>
