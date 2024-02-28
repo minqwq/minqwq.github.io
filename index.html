@@ -355,7 +355,7 @@ clickEffect();//调用特效函数
 </script>
 <!--WHITE BLACK ALTERNATE--!>
 <script>
-function blinklink() {
+function blinkwhitelink() {
     if (!document.getElementById('blinkwhite').style.color) {
         document.getElementById('blinkwhite').style.color = "black";
     }
@@ -364,17 +364,17 @@ function blinklink() {
     } else {
         document.getElementById('blinkwhite').style.color = "black";
     }
-    timer = setTimeout("blinklink()", 500);
+    timer = setTimeout("blinkwhitelink()", 500);
 }
 function stoptimer() {
     clearTimeout(timer);
 } 
-blinklink()
+blinkwhitelink()
 </script>
 <!--WHITE BLACK ALTERNATE--!>
 <!--RED BLACK ALTERNATE--!>
 <script type = "text/javascript" >
-function blinklink() {
+function blinkredlink() {
     if (!document.getElementById('blinkred').style.color) {
         document.getElementById('blinkred').style.color = "red";
     }
@@ -383,12 +383,12 @@ function blinklink() {
     } else {
         document.getElementById('blinkred').style.color = "red";
     }
-    timer = setTimeout("blinklink()", 500);
+    timer = setTimeout("blinkredlink()", 500);
 }
 function stoptimer() {
     clearTimeout(timer);
 } 
-blinklink()
+blinkredlink()
 </script>
 <!--RED BLACK ALTERNATE--!>
 <!--END OF COPY AND PASTE--!>
