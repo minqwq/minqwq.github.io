@@ -30,7 +30,7 @@ function showTime(clock){
     var minu = now.getMinutes();
     var second = now.getSeconds();
     month = month+1;
-    var arr_work = new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+    var arr_work = new Array("7week","1week","2week","3week","4week","5week","6week");
     var week = arr_work[ now.getDay()];
     var time = year+"-"+month+"-"+day+" "+ week+" "+hour+"h "+minu+"m "+second+"s ";
     clock.innerHTML=""+time;
