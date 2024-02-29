@@ -4,77 +4,78 @@
 <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Minimalist Start│Made by minqwq</title>
 </head>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        body{
+            overflow: hidden;
+        }
+    </style>
 <body style="background-color: #000000;color: #00FF00;">
 
-<canvas id="canvas"  style="background:black" width="620"  height="340"></canvas>
-<script  type="text/javascript">
-       window.onload  = function(){
-              var  canvas = document.getElementById("canvas");
-              var  context = canvas.getContext("2d");
-              var  W = window.innerWidth;
-              var  H = window.innerHeight;
-              canvas.width  = W;
-              canvas.height  = H;
-              var  fontSize = 15;
-              var  colunms = Math.floor(W /fontSize);  
-              var  drops = [];
-              for(var  i=0;i<colunms;i++){
-                     drops.push(0);
-              }
-
-              var  str ="01abcdefghijklmnopqurstuvwxyz";
-
-              function  draw(){
-
-                     context.fillStyle  = "rgba(0,0,0,0.05)";
-
-                     context.fillRect(0,0,W,H);
-
-                     context.font  = fontSize + 'px arial';
-
-                     context.fillStyle  ="green";
-
-                     for(var  i=0;i<colunms;i++){
-
-                            var  index = Math.floor(Math.random() * str.length);
-
-                            var  x = i*fontSize;
-
-                            var  y = drops[i] *fontSize;
-
-                            context.fillText(str[index],x,y);
-
-                            if(y  >= canvas.height && Math.random() > 0.92){
-
-                                   drops[i]  = 0;
-
-                            }
-
-                            drops[i]++;
-
-                     }
-
-              };
-
-              function  randColor(){
-
-                     var  r = Math.floor(Math.random() * 256);
-
-                     var  g = Math.floor(Math.random() * 256);
-
-                     var  b = Math.floor(Math.random() * 256);
-
-                     return  "rgb("+r+","+g+","+b+")";
-
-              }
-
-              draw();
-
-              setInterval(draw,30);
-
-       };
-
-</script>
+<canvas id="mom" style="background:#111"></canvas>
+    <script>
+     window.onload = function(){
+        //获取画布对象
+        var canvas = document.getElementById("mom");
+        //获取画布的上下文
+        //getContext() 方法返回一个用于在画布上绘图的环境。
+        var context =canvas.getContext("2d");
+        //获取浏览器屏幕的宽度和高度
+        var W = window.innerWidth;
+        var H = window.innerHeight;
+        //设置canvas的宽度和高度
+        canvas.width = W;
+        canvas.height = H;
+        //每个文字的字体大小
+        var fontSize = 16;
+        //计算列
+        var colunms = Math.floor(W /fontSize);
+        //记录每列文字的y轴坐标
+        var drops = [];
+        //给每一个文字初始化一个起始点的位置
+        //计算每一个文字所谓坐标 存储y轴的坐标  
+        for(var i=0;i<colunms;i++){
+            drops.push(0);
+        }
+        //运动的文字
+        var str ="JavaScript function(){}";
+        //4:fillText(str,x,y);原理就是去更改y的坐标位置
+        //绘画的函数
+        function draw(){
+            context.fillStyle = "rgba(0,0,0,0.05)";
+            //fillRect() 方法绘制“已填色”的矩形。默认的填充颜色是黑色。
+            context.fillRect(0,0,W,H);
+            //给字体设置样式
+            context.font = "700 "+fontSize+"px  微软雅黑";
+            //给字体添加颜色
+            context.fillStyle ="#00AA00";//可以rgb,hsl, 标准色，十六进制颜色
+            //写入画布中
+            for(var i=0;i<colunms;i++){
+                var index = Math.floor(Math.random() * str.length);//设置文字出发时间随机 Math.floor(Math.random()*str.length)让数组里面的文字索引随机出现  
+                var x = i*fontSize;
+                var y = drops[i] *fontSize;//也让y轴方向也向下掉一个文字的距离
+                context.fillText(str[index],x,y);
+                // //如果要改变时间，肯定就是改变每次他的起点
+                if(y >= canvas.height && Math.random()>0.99){
+                    drops[i] = 0;
+                }
+                drops[i]++;//让数组里面的值每次加一，用于上面的y轴下掉 
+            }
+        };
+        //随机颜色
+        function randColor(){
+            var r = Math.floor(Math.random() * 256);
+            var g = Math.floor(Math.random() * 256);
+            var b = Math.floor(Math.random() * 256);
+            return "rgb("+r+","+g+","+b+")";
+        }
+        draw();
+        setInterval(draw,20);
+    };
+    </script>
 <marquee bgcolor="#000000" scrollamount="7"><font color="#00FF00">Minimalist Start 起始页上线辣！！！​</font></marquee>
 <h2 align="center">Minimalist Start</h2>
 <p align="right">做一个真正简单的开始页。 --minqwq</p>
