@@ -6,6 +6,75 @@
 </head>
 <body style="background-color: #000000;color: #00FF00;">
 
+<canvas id="canvas"  style="background:black" width="620"  height="340"></canvas>
+<script  type="text/javascript">
+       window.onload  = function(){
+              var  canvas = document.getElementById("canvas");
+              var  context = canvas.getContext("2d");
+              var  W = window.innerWidth;
+              var  H = window.innerHeight;
+              canvas.width  = W;
+              canvas.height  = H;
+              var  fontSize = 15;
+              var  colunms = Math.floor(W /fontSize);  
+              var  drops = [];
+              for(var  i=0;i<colunms;i++){
+                     drops.push(0);
+              }
+
+              var  str ="01abcdefghijklmnopqurstuvwxyz";
+
+              function  draw(){
+
+                     context.fillStyle  = "rgba(0,0,0,0.05)";
+
+                     context.fillRect(0,0,W,H);
+
+                     context.font  = fontSize + 'px arial';
+
+                     context.fillStyle  ="green";
+
+                     for(var  i=0;i<colunms;i++){
+
+                            var  index = Math.floor(Math.random() * str.length);
+
+                            var  x = i*fontSize;
+
+                            var  y = drops[i] *fontSize;
+
+                            context.fillText(str[index],x,y);
+
+                            if(y  >= canvas.height && Math.random() > 0.92){
+
+                                   drops[i]  = 0;
+
+                            }
+
+                            drops[i]++;
+
+                     }
+
+              };
+
+              function  randColor(){
+
+                     var  r = Math.floor(Math.random() * 256);
+
+                     var  g = Math.floor(Math.random() * 256);
+
+                     var  b = Math.floor(Math.random() * 256);
+
+                     return  "rgb("+r+","+g+","+b+")";
+
+              }
+
+              draw();
+
+              setInterval(draw,30);
+
+       };
+
+</script>
 <marquee bgcolor="#000000" scrollamount="7"><font color="#00FF00">Minimalist Start 起始页上线辣！！！​</font></marquee>
 <h2 align="center">Minimalist Start</h2>
 <p align="right">做一个真正简单的开始页。 --minqwq</p>
