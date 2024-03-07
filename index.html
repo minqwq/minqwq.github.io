@@ -45,6 +45,48 @@ body {
     if(String(snum).length ==1 ){ snum = "0" + snum; } document.getElementById("timeDate").innerHTML = "网站已经创建 "+dnum+" 天";
     document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; } setInterval("createtime()",250);
 </script>
+<script type="text/javascript">
+function getLastTime(){
+// 获取系统现在时间
+var date = new Date();
+// 获取今年年份
+var year = date.getFullYear();
+// 创建获取指定时间为：今年12月31日23时59分59秒，问：为什么不是24小时？因为小时在js中是从0开始算的0~23，分和秒也是一样从0~59
+var endDate = new Date(year,12,31,23,59,59);
+// 指定时间毫秒数 减去 现在时间毫秒数 得出 两个时间之间的毫秒差值
+// 我们知道1000毫秒等于1秒，60秒等于1分钟，60分钟等于1个小时，24个小时等于1天，问：那怎么用毫秒差得出距离的天数或者小时、分钟呢？
+/* 答： 拿天数比如以此类推：
+1. 首先我们将毫秒数除于1000得出秒数，因为1000毫秒等于1秒
+2. 得出时间差的秒数后，我们需要算出一天有多少秒？，我们知道一天有24个小时每个小时60分钟每分钟60秒，所以只需要24小时乘于60分钟得出1440分钟，然后1440分钟乘于60秒得出86400秒
+3. 得出一天有86400秒后除于时间差的秒就得出距离指定日期还有多少天了
+*/
+var time = Math.floor((endDate.getTime() - date.getTime())/1000);
+// 获取差值的天数
+var day = Math.floor(time/(24*60*60));
+// 获取差值的小时，时间差秒数取余数86400秒再除于一个小时3600秒得出相差小时，问:为什么取一天的秒的余数呢？？，
+// 答：时间差的秒除于1天的秒数，我们取这个的余数相当于取了不够除于1天的秒数，也就是说还剩下多少秒就是还剩下多少小时，
+// 因为如果足够除于一天的秒数那就是距离还有多少天了也就是天的数值了，而小时则是剩下的秒 除于 60分钟乘于60秒得出一个小时有3600秒然后再除于剩下的秒就变成多少小时了。
+// 后面的分钟和秒数大家自已动手算吧。
+// 注意：相同优先级运算符按从左到右的顺序计算
+// 附上一份mdn的运算符优先级表：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence
+var hour = Math.floor(time%(24*60*60)/(60*60));
+// 获取差值的分钟，简单来说就是取余的作用就是得出不够一天的秒数和不够一个小时的秒数后除于60秒得出分钟
+var minute = Math.floor(time%(24*60*60)%(60*60)/60);
+// 获取差值的秒数,简单来说就是取余的作用就是得出不够一天的秒数和不够一个小时的秒数和不够一分钟的秒
+var second = Math.floor(time%(24*60*60)%(60*60)%60);
+// 如果数值小于9则是一位数，则补0
+day = day > 9 ? day : '0' + day;
+hour = hour > 9 ? hour : '0' + hour;
+minute = minute > 9 ? minute : '0' + minute;
+second = second > 9 ? second : '0' + second;
+// 获取显示元素将结果输出
+document.getElementById("show").textContent = year +"年还剩"+day+"天"+hour+"时"+minute+"分"+second+"秒";
+}
+// 页面加载后，就调用一次，解决一秒后出现的问题
+getLastTime();
+// 设置1秒定时以刷新时间
+setInterval(getLastTime,1000);
+</script>
 <script>
 var DEFAULT_VERSION = "9.0";
 var ua = navigator.userAgent.toLowerCase();
@@ -438,6 +480,7 @@ blinkredlink()
     <br>
     <span id="times">Loading "times" ...</span>
 </div>
+<div id="show" style="text-align:left;font-size:18px;color:#000000;padding:10px 0;font-weight:bold">Loading "show" ...</div>
 <p>该网站累计被访问次数</p><img src="http://count.himiku.com/get/@minqwq?theme=rule34" alt="moecounter" />
 <hr></hr>
 <h2>Hitokoto -- 一言</h2>
