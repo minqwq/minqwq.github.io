@@ -1,5 +1,5 @@
 @font-face {
   font-family: 'unifont';
-  src: local('tahoma'), local('roboto'), url(https://minqwq.github.io/unifont.ttf)
+  src: local('tahoma'), local('roboto'), url(https://minqwq.github.io/unifont.ttf);
   format('truetype');
 }
