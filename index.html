@@ -537,6 +537,17 @@ setInterval(getLastTime,1000);
 </div>
 </form>
 <hr></hr>
+<script>
+function myFunction(){
+	var x=document.getElementById("luckvalue")
+	x.innerHTML=Math.floor((Math.random()*100)+1);
+}
+</script>
+<!--JS By www.runoob.com, thanks for this website help me!-->
+<h2>今日人品</h2>
+<p id="luckvalue"><strong>请点击按钮查看...</strong></p>
+<p style="background:#0000FF"><small>就算很低也不要伤心，这并不是真的</small></p>
+<button onclick="myFunction()">今天我的人品是？</button>
 <h2>网站地图</h2>
 <a href="http://minqwq.github.io/updatehistory.html">网站更新历史</a><br></br>
 <a href="http://minqwq.github.io/calc.html">计算器</a><br></br>
