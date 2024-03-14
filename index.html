@@ -419,6 +419,23 @@ clickEffect();//调用特效函数
             }
     }
 </script>
+<audio id="audio" src="/audio/click.mp3"></audio>
+    <script>
+        //单个网页实现单击屏幕发出声音
+        function playSound(){
+            var audio=document.getElementById("audio");
+            if(audio.paused) {  //如果音频是暂停状态
+                audio.load;     //加载音频文件
+                audio.play();	//播放
+            }else {             //否则，也就是说音频是播放状态
+                audio.pause();  //就暂停
+            }
+        }
+        //调用
+        window.onclick=function () {
+            playSound();
+        }
+    </script>
 <!--WHITE BLACK ALTERNATE-->
 <script>
 function blinkwhitelink() {
