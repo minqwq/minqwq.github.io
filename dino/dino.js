@@ -36,7 +36,7 @@ function Runner(outerContainerId, opt_config) {
   this.distanceMeter = null;
   this.distanceRan = 0;
 
-  this.highestScore = 0;
+  this.highestScore = 114514;
 
   this.time = 0;
   this.runningTime = 0;
