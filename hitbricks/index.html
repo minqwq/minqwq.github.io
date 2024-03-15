@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>打砖块</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style: none;
+        }
+        #game{
+            width: 1300px;
+            height: 630px;
+            border: 2px solid rgb(184, 224, 109);
+            margin: 20px auto;
+        }
+        #show{
+            width: 270px;
+            height: 510px;
+            float: right;
+            background-color: rgb(27, 25, 25);
+            margin: 20px 20px 0 30px;
+            color: rgb(56, 218, 56);
+        }
+        #show span{
+            display: block;
+            padding: 15px 0 15px 7px;
+        }
+        #show #info{
+            font-size: 20px;
+            font-weight: bold;
+            border-bottom: 2px solid rgb(56,218,56);
+            margin-top: 10px;
+            padding-bottom: 25px;
+        }
+        #show #time,#res,#times,#score{
+            border-bottom:  1px dashed rgb(56,218,56);
+        }
+        #box{
+            display: block;
+            width: 899px;
+            height: 510px;
+            border: 2px solid rgb(200,0,0);
+            margin: 20px 0 0 75px;
+            position: relative;
+        }
+        #box ul{
+            height: 188px;
+            position: relative;
+        }
+        #box ul li{
+            width: 89px;
+            height: 20px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: blue;
+        }
+        #box #bubble{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: blueviolet;
+            /* box-shadow: black ; */
+            position: absolute;
+            top: 474px;
+            left: 40px;
+        }
+        #box #board{
+            width: 100px;
+            height: 15px;
+            background-color: rgb(199, 142, 120);
+            position: absolute;
+            bottom: 1px;
+            left: 0;
+            
+        }
+        button{
+            width: 100px;
+            height: 40px;
+            margin: 40px 0 0 500px;
+        }
+    </style>
+</head>
+<body>
+    <div id="game">
+        <!-- 游戏面板 -->
+        <div id="show">
+            <span id="info">游戏重要信息</span>
+            <span>当前时间：</span>
+            <span id="time">加载中···</span>
+            <span>游戏状态</span>
+            <span id="res">加载中···</span>
+            <span>挡板打球的次数</span>
+            <span id="times">加载中···</span>
+            <span>游戏得分</span>
+            <span id="score">加载中···</span>
+        </div>
+        <!-- 游戏区域 -->
+        <div id="box">
+            <!-- 挡板、小球、砖块 -->
+            <ul>
+                <li></li>   一共90个li                <li></li>
+            </ul>
+            <div id="bubble"></div>
+            <div id="board"></div>
+        </div>
+        <button id="start">开始游戏</button>
+    </div>
+</body>
+<script>
+    function $(id){
+        return document.getElementById(id);
+    }
+    // 随机函数
+    function rand(min,max){
+        return Math.floor(Math.random()*(max-min+1))+min;
+    }
+    // 打砖块 构造函数
+    function blockBreak(){
+        // 这里的$指的是获取getElementById的$函数
+        box = $("box");//容器
+        list = document.getElementsByTagName("li");//砖块
+        board = $("board");//挡板
+        ball = $("bubble");//小球
+        fx = 2;//横向速度
+        fy = -2;//纵向速度
+        leftInit = 0;//砖块left初始值
+        topInit = 0;//砖块的top初始值
+    }
+    // 初始化功能，摆放每一个砖块的位置
+    blockBreak.prototype.init = function(){
+        for(var i = 0 ; i < list.length ; i ++){
+            // 给每个砖块设置随机背景颜色 
+            list[i].style.backgroundColor = "rgb("+rand(0,255)+","+rand(0,255)+","+rand(0,255)+")";
+            // 砖块位置
+            // 每一个砖块的  x值  = 一排中（几-1）个砖块 * 一个砖块的宽度
+            var x = leftInit * list[0].offsetWidth +i%10;
+            // leftInit值做一个加一操作
+            leftInit++;
+            var y =topInit;
+            list[i].style.left = x + "px";
+            list[i].style.top = y + "px";
+// console.log(list[0].offsetHeight)
+            // 砖块的换行
+            if((i+1)%10 == 0){
+                // 换行之后，砖块距离左侧的值变为0 ，高度加上一个砖块的高度
+                leftInit = 0;
+                topInit += list[0].offsetHeight + 1;
+            }
+        }
+    }
+    // 键盘控制挡板运动
+    blockBreak.prototype.keydown = function(){
+        document.onkeydown = function(e){
+            var e = e || event;
+            // 如果按的是键盘左键
+            if( e.keyCode == 37){
+                // 则挡板往左移动15个像素，也就是距离左侧的距离减少15个像素
+                board.style.left = board.offsetLeft - 40 + "px";
+                // 当挡板距离上一层也就是游戏框的距离为0 时，挡板距离左侧的距离设置为0
+                if(board.offsetLeft <= 0){
+                    board.style.left = 0;
+                }
+            }
+            // 如果按的是键盘右键
+            if( e.keyCode == 39){
+                // 则挡板往右侧移动15个像素，也就是距离左侧的距离加15个像素
+                board.style.left = board.offsetLeft + 40 + "px";
+                // 如果挡板距离左侧的距离  >= 上层盒子的宽度(盒子宽度有2个像素的边框) - 挡板的宽度的时候
+                if(board.offsetLeft >= (box.offsetWidth -4 - board.offsetWidth)){
+                    board.style.left = box.offsetWidth - board.offsetWidth - 4 + "px";
+                }
+            }
+        }
+    }
+    // 小球碰到挡板的次数
+    var times = 0;
+    // 小球打掉砖块得到的分数
+    var score = 0;
+    // 小球运动
+    // 小球的运动一定会用到定时器
+    blockBreak.prototype.move = function(){
+        var timer = null;
+        timer = setInterval(function(){
+            // 每0.01秒。小球距离左侧的距离增加一个像素，具体上侧的距离减少一个像素，这就类似于小球在运动
+            ball.style.left = ball.offsetLeft + fx + "px";
+            ball.style.top = ball.offsetTop + fy + "px"
+            // 小球四个方向的反弹
+            // 上，  当小球距离上侧的距离小于0时（小球飞出边界时，设置小球每0.01秒，距离上侧的距离增加一个相素，也就是将原来的fy由-2改为2，由于每次都要反向，所以直接*-1即可）
+            if(ball.offsetTop <= 0){
+                fy *= -1;
+            }
+            // 右
+            if(ball.offsetLeft >= (box.offsetWidth - ball.offsetWidth)){
+                fx *= -1;
+            }
+            // 下
+            if(ball.offsetTop >= (box.offsetHeight - ball.offsetHeight - 5)){
+                // 游戏结束了
+                box.appendChild(document.createTextNode("GameOver!"));
+                clearInterval(timer);
+                $("res").innerHTML = "游戏结束";
+            }
+            // 左
+            if(ball.offsetLeft <= 0 ){
+                fx *= -1;
+            }
+            // 小球和挡板的碰撞反弹
+            // 1.小球的高度+小球距离上侧的高度 >= 挡板的高度时
+            if(ball.offsetHeight + ball.offsetTop >= board.offsetTop){
+                // 2.小球的宽度 +小球距离左侧的距离 >= 挡板距离左侧的距离
+                // 3.小球距离左侧的距离 < 挡板距离左侧的距离 + 挡板的宽度
+                if(ball.offsetWidth + ball.offsetLeft >= board.offsetLeft ){
+                    if(ball.offsetLeft < board.offsetLeft + board.offsetWidth){
+                        fy *= -1;
+                        times ++;
+                        $("times").innerHTML = "挡板打球" + times +"次"
+                    }
+                    
+                }
+            }
+            // 小球和砖块的 碰撞反弹
+            // 以一个小球为基准，遍历所有砖块，找到满足条件的那个砖块，隐藏就好了
+            for(var i = 0 ; i < list.length ; i++){
+                // 小球距离上侧的距离 <= 这个砖块距离上侧的距离 + 这个砖块的高度
+                // 2.小球距离左侧的距离 >= 这个砖块的距离左侧的距离
+                // 3.小球距离左侧的距离 <= 这个砖块距离左侧的距离 + 这个砖块的宽度
+                
+                if(ball.offsetTop <= list[i].offsetTop +list[i].offsetHeight){
+                    if(ball.offsetLeft >=list[i].offsetLeft ){  
+                        console.log(list[i].offsetLeft);  
+                        if(ball.offsetLeft <=list[i].offsetLeft + list[i].offsetWidth){
+                            fy *= -1;
+                            list[i].style.display = "none";
+                            score ++;
+                            $("score").innerHTML = "得分" + score;
+                        }
+                    }
+                }
+            }
+        },10)
+        
+    }
+ 
+    var bb = new blockBreak();
+    bb.init();
+ 
+    $("start").onclick = function(){
+        bb.keydown();
+        bb.move();
+ 
+        // 右侧信息实现系统时间的显示
+        setInterval(function(){
+            var now = new Date();
+            $("time").innerHTML =  now.getFullYear() + "/" + (now.getMonth() + 1) + "/" + now.getDate();
+        },10)
+        $('res').innerHTML = "游戏加载完成了"
+    }
+</script>
+</html>
