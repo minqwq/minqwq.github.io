@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>网页(倒)计时器</title>
+</head>
+<body>
+	<p>
+		请输入时间<br>
+		时: <input type="text" id="hr" value="0"><br>
+		分: <input type="text" id="min" value="0"><br>
+		秒: <input type="text" id="th" value="0"><br><br>
+		<button type="button" onclick="main()">开始倒计时!</button>
+		<p id="tx"><p></p>
+	</p>
+
+	<script>
+		//全局变量，记录剩余毫秒数
+		var a;
+		//全局变量，以便于控制更新文本框的函数计时结束后停下。
+		var timeVar;
+		function main()
+		{
+			a=hr.value*60000*60+min.value*60000+th.value*1000;
+			//启动计时器，1000毫秒执行time()一次
+			timeVar=setInterval(function(){time()},1000);
+		}
+		//每秒更新一次文本框
+		function time()
+		{
+			t=(a%60000)/1000;
+			m=((a-t*1000)%(60000*60))/(1000*60);
+			h=(a-t*1000-m*60000)/(1000*60*60);
+			//a<0时计时结束
+			if(a>=0){
+				document.getElementById("tx").innerHTML = "剩余时间"+h+"时"+m+"分"+t+"秒";
+				console.log(a);
+				//每次减去间隔时间1S
+				a=a-1000;
+			}else{
+				document.getElementById("tx").innerHTML = "倒计时结束";
+				showTimeOver();
+				//关闭计时器
+				clearInterval(timeVar);
+			}
+		}
+		//计时结束时调用它调出弹出计时结束警告框
+		function showTimeOver()
+		{
+	  	 	alert("倒计时结束！");
+		}
+	</script>
+</body>
+</html>
