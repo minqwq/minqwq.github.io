@@ -38,7 +38,7 @@ body, html {
         </div>
         <div id="header" style="display:none;">
             <h3>
-                Tetris JS 
+                Tetris JS
                 <a href="https://github.com/nbarkhina/TetrisJS" target="_blank">
                     <img src="github_logo.png" style="height: 25px; padding-bottom: 5px; padding-left: 10px;">
                 </a>
@@ -48,8 +48,8 @@ body, html {
             rv-text="data.getPauseButtonText | call data.game_mode"></button>
             <br>
             <div class="d-md-none">
-                <b>FPS:</b> <span rv-text="data.currentfps"></span> 
-                <b>Level:</b> { data.level } <b>Lines:</b> { data.lines }
+                <b>帧数:</b> <span rv-text="data.currentfps"></span> 
+                <b>关卡:</b> { data.level } <b>Lines:</b> { data.lines }
             </div>
             <div class="d-none d-md-block">
                 <br>
@@ -57,9 +57,9 @@ body, html {
         </div>
         <div id="gameArea" class="row" style="display:none;">
             <div class="col-md-4 d-none d-md-block" style="text-align:right;">
-                <b>FPS:</b> <span rv-text="data.currentfps"></span><br>
-                <b>Level:</b> { data.level }<br>
-                <b>Lines:</b> { data.lines }<br>
+                <b>帧数:</b> <span rv-text="data.currentfps"></span><br>
+                <b>关卡:</b> { data.level }<br>
+                <b>已消除行数:</b> { data.lines }<br>
                 <br><br><br>
                 <div style="float:right;">
                     <table style="text-align: center;">
@@ -86,7 +86,7 @@ body, html {
                         <tr>
                             <td><b>N</b></td>
                             <td></td>
-                            <td>New Game</td>
+                            <td>新游戏</td>
                         </tr>
                     </table>
                 </div>
