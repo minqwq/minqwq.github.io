@@ -39,7 +39,7 @@ body {
 <script>
     window.onload = function (ev) {
         var nowDate, nowTimes, lastTimes, lastSeconds, lastD, lastH, lastM, lastS;
-        var time = document.getElementsByTagName('div')[0];
+        var time = document.getElementsByName('32bitsystemtimebomb')[0];
         // 1. 定义将来时间
         var preDate = new Date('2038/01/19 03:14:07');
         var preTimes = preDate.getTime();   // 获取目标日期距离1970年1月1日毫秒数
@@ -60,7 +60,7 @@ body {
             lastM = size(parseInt(lastSeconds / 60 % 60));
             lastS = size(parseInt(lastSeconds % 60));
             // 7. 将结果放入div
-            time.innerHTML = '距离32位系统时间戳爆炸还剩：' + lastD +'天' + lastH + '小时' + lastM + '分钟' + lastS + '秒！';
+            time.innerHTML = '距离32位系统时间戳爆炸还剩：' + lastD +'天' + lastH + '小时' + lastM + '分钟' + lastS + '秒';
         }, 1000);
 
         function size(number){
@@ -681,7 +681,7 @@ blinkredlink()
 <p>欢迎回来，Anonymous</p>
 <body>
 <div class="32bitsystemtimebomb">
-<p id="time">waiting...</p>
+<p id="32bitsystemtimebomb">waiting...</p>
 </div>
 </body>
    
