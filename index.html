@@ -36,44 +36,41 @@ body {
 </head>
 <body style="background-color: #000000;color: #FFFFFF;" onload="newtext()">
 
- <script>
- //获取DOM标签
-    var day = document.getElementById('day');
-    var hour = document.getElementById('hour');
-    var minute = document.getElementById('minute');
-    var second = document.getElementById('second');
-    //计时器setInterval 
-    setInterval(function () {
-      //new Date()获取本地时间
-      var today = new Date();
-      //添加结束时间
-      var stopTime = new Date("2038/01/19 03:14:07");
-      //获取时间戳（毫秒）
-      var zhuanyu = stopTime.getTime() - today.getTime();
-      // 方法一
-      //转换为天数
-      zhuanD = parseInt(zhuanu / (60 * 60 * 24 * 1000));
-      //减去天所用的毫秒数
-      D = parseInt(zhuanu) - parseInt(zhuanD * 60 * 60 * 24 * 1000);
-      //天所用剩余的毫秒数转换成小时
-      zhuanH = parseInt(D / (60 * 60 * 1000));
-      //减去天、小时所用的毫秒数
-      H = D - zhuanH * 60 * 60 * 1000;
-      //天、小时所用剩余的毫秒数转换成分钟
-      zhuanM = parseInt(H / (60 * 1000));
-       //减去天、小时、分钟所用的毫秒数
-      M = H - zhuanM * 60 * 1000;
-       //天、小时、分钟所用剩余的毫秒数转换成秒
-      zhuanS=parseInt(M/(1000))
-      //给html中的天赋值
-      day.innerHTML = zhuanD;
-      hour.innerHTML = zhuanH;
-      minute.innerHTML = zhuanM;
-      second.innerHTML = zhuanS;
-      //计时器setInterval 每1000毫秒调用一次函数function
-    }, 1000)
+<script>
+    window.onload = function (ev) {
+        var nowDate, nowTimes, lastTimes, lastSeconds, lastD, lastH, lastM, lastS;
+        var time = document.getElementsByTagName('div')[0];
+        // 1. 定义将来时间
+        var preDate = new Date('2038/01/19 03:14:07');
+        var preTimes = preDate.getTime();   // 获取目标日期距离1970年1月1日毫秒数
+        // 2. 开启定时器
+        setInterval(function () {
+            // 3. 获取当前时间
+            nowDate = new Date();
+            // 4. 获取距离1970年1月1日毫秒数
+            nowTimes = nowDate.getTime();
+            // 5. 获取剩余毫秒数
+            lastTimes = preTimes - nowTimes;
+            // 6. 毫秒转换
+            // ① 毫秒转换为秒
+            lastSeconds = parseInt(lastTimes / 1000);
+            // ② 通过秒转天、时、分、秒
+            lastD = size(parseInt(lastSeconds / 3600 / 24));
+            lastH = size(parseInt(lastSeconds / 3600 % 24));
+            lastM = size(parseInt(lastSeconds / 60 % 60));
+            lastS = size(parseInt(lastSeconds % 60));
+            // 7. 将结果放入div
+            time.innerHTML = '距离32位系统时间戳爆炸还剩：' + lastD +'天' + lastH + '小时' + lastM + '分钟' + lastS + '秒！';
+        }, 1000);
 
-  </script>
+        function size(number){
+            return number < 10 ? '0' + number : number ;
+        }
+    }
+
+</script>
+</body>
+</html>
 <style>
 overflow-y: scroll;
 </style>
@@ -683,46 +680,7 @@ blinkredlink()
 <p>悄悄告诉你，index.html已经600行了，你可以去仓库看一下</p>
 <p>欢迎回来，Anonymous</p>
 <body>
- <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
-
-    .time-item {
-      width: 430px;
-      height: 45px;
-      margin: 0 auto;
-    }
-
-    .time-item strong {
-      background: orange;
-      color: #fff;
-      padding: 0 10px;
-      margin-right: 10px;
-      border-radius: 5px;
-      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-    }
-
-    .time-item>span {
-      float: left;
-      color: orange;
-      margin: 0 10px;
-    }
-
-    .title {
-      width: 260px;
-      height: 50px;
-      margin: 200px auto 50px auto;
-    }
-  </style>
-<p>32位系统寿命还有</p>
-  <div class="time-item">
-    <span><span id="day">00</span>天</span>
-    <strong><span id="hour">00</span>时</strong>
-    <strong><span id="minute">00</span>分</strong>
-    <strong><span id="second">00</span>秒</strong>
-  </div>
+<div id="time"></div>
 </body>
    
 <div class="item">
