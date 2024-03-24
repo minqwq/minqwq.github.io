@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="icon"
+			href="https://hub.koneko.link/cdn/icons/black.png"
+			type="image/gif"
+			sizes="16x16" />
+		<title>4koneko - Map Selector</title>
+		<link rel="stylesheet" href="/css/main.css" />
+	</head>
+	<body>
+		<main>
+			<nav>
+				<span id="counter"></span>
+				<div>
+					<a href="about.html">about</a>
+					<a href="settings.html">settings</a>
+					<a href="/rwk/?custom=true">custom file</a>
+				</div>
+			</nav>
+			<div id="out"></div>
+		</main>
+	</body>
+	<script>
+		fetch("https://maps.4koneko.world/list.json")
+			.then((res) => res.json())
+			.then((data) => {
+				if (localStorage.showCounter == "true")
+					document.getElementById("counter").innerHTML = data.length;
+				data.forEach((map) => {
+					const div = document.createElement("div");
+					div.innerHTML = `
+					<div id="${map.file.split(".")[0]}">
+					<p style="font-weight: bold;">${map.title}</p>
+					<p>by: ${map.artist}</p>
+					<a href="#" onclick="openMap('${
+						map.file.split(".")[0]
+					}')" style="color: dodgerblue; text-decoration: none;">open map</a>
+					</div>
+					`;
+					div.style.backgroundImage = `url(https://cdn.quavergame.com/mapsets/${
+						map.file.split(".")[0]
+					}.jpg)`;
+					div.style.backgroundSize = "cover";
+					div.style.backgroundPosition = "center";
+					div.style.backgroundRepeat = "no-repeat";
+					div.style.borderRadius = "5px";
+					div.style.padding = "10px";
+					div.style.width = "90%";
+					div.style.height = "200px";
+					div.style.display = "flex";
+					div.style.alignItems = "center";
+					div.style.justifyContent = "center";
+					div.style.flexDirection = "column";
+					div.style.color = "white";
+					div.style.textShadow =
+						"-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
+					document.getElementById("out").appendChild(div);
+				});
+				data.forEach((map) => {
+					let id = map.file.split(".")[0];
+					let element = document.getElementById(id);
+					// set background to be 0.5 opacity and black
+					element.style.backgroundColor = "rgba(0, 0, 0, 0.2)";
+					element.style.borderRadius = "5px";
+					element.style.padding = "10px";
+					element.style.width = "90%";
+				});
+			});
+		function openMap(file) {
+			// create modal
+			const modal = document.createElement("div");
+			1;
+			modal.style.position = "fixed";
+			modal.style.top = "0";
+			modal.style.left = "0";
+			modal.style.width = "100%";
+			modal.style.height = "100%";
+			modal.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+			modal.style.display = "flex";
+			modal.style.alignItems = "center";
+			modal.style.justifyContent = "center";
+			modal.style.zIndex = "999";
+			// display modal
+			document.body.appendChild(modal);
+			// create iframe
+			const iframe = document.createElement("iframe");
+			iframe.src = "/rwk/zip.html?file=" + file + "&e=" + Date.now();
+			// set iframe name
+			iframe.name = Date.now();
+			iframe.style.width = "80%";
+			iframe.style.height = "80%";
+			iframe.style.border = "none";
+			iframe.style.backgroundColor = "white";
+			// display iframe
+			modal.appendChild(iframe);
+			// when you click outside the iframe, close
+			modal.addEventListener("click", () => {
+				modal.remove();
+			});
+		}
+		function playMap(file, mapid) {
+			window.location.href = "/rwk/?file=" + file + "&id=" + mapid;
+		}
+		// params
+		const params = new URLSearchParams(window.location.search);
+		let error = params.get("error");
+		if (error == "notKeys4") {
+			alert("That map is not a 4k map! Please select a 4k map.");
+			window.location = "/";
+		}
+		if (error == "paramsMissing") {
+			alert("Please provide a file and id parameter.");
+			window.location = "/";
+		}
+	</script>
+</html>
