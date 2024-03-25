@@ -37,6 +37,26 @@ body {
 <body style="background-color: #000000;color: #FFFFFF;" onload="newtext()">
 
 <script>
+//动态标题
+var OriginTitile = document.title;
+var titleTime;
+document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+        //离开当前页面时标签显示内容
+        document.title = 'o(╥﹏╥)o';
+        clearTimeout(titleTime);
+    }
+    else {
+        //返回当前页面时标签显示内容
+        document.title = '｡:.ﾟヽ(*´∀`)ﾉﾟ.:｡' + OriginTitile;
+        //两秒后变回正常标题
+        titleTime = setTimeout(function () {
+            document.title = OriginTitile;
+        }, 2000);
+    }
+});
+</script>
+<script>
     window.onload = function (ev) {
         var nowDate, nowTimes, lastTimes, lastSeconds, lastD, lastH, lastM, lastS;
         var time = document.getElementsByName('32bitsystemtimebomb')[0];
