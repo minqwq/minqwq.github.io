@@ -5,10 +5,8 @@
   <title>minqwq -- rss</title>
   <description>minqwq个人网站的rss频道</description>
   <item>
-  <title>这是第一个rss新闻</title>
-  <description>
-idk what can i say
-  </description>
+    <title>这是第一个rss新闻</title>
+    <description>idk what can i say</description>
   </item>
 </channel>
 
