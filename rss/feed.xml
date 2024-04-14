@@ -2,11 +2,14 @@
 <rss version="2.0">
 
 <channel>
-  <title>minqwq's rss is under testing</title>
+  <title>minqwq -- rss</title>
+  <description>minqwq个人网站的rss频道</description>
+  <item>
+  <title>这是第一个rss新闻</title>
   <description>
-正在测试rss可用性...
-测试结果:测试中
+idk what can i say
   </description>
+  </item>
 </channel>
 
 </rss>
