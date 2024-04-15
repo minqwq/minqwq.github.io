@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>井字游戏</title>
+</head>
+<body>
+<canvas id="canvas" width="340" height="300" onclick="cnvs_getCoordinates(event)"></canvas>
+<!--<canvas id="canvas" width="340" height="300" onmousemove="cnvs_getCoordinates(event)"></canvas>-->
+ 
+<script>
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+ 
+    var color="black";
+ 
+    init();
+ 
+    var init1=0;
+    var init2=0;
+    var init3=0;
+    var init4=0;
+    var init5=0;
+    var init6=0;
+    var init7=0;
+    var init8=0;
+    var init9=0;
+ 
+    function cnvs_getCoordinates(e){
+        x=e.clientX;
+        y=e.clientY;
+        //document.getElementById("xycoordinates").innerHTML="Coordinates: (" + x + "," + y + ")";
+ 
+        //左一
+        if(x>=20&&x<=80&&y>=20&y<=80){
+            if(init1==1||init1==2){
+                alert("已有棋子！");
+                return;
+            }
+            if(color=="black"){
+                context.beginPath();
+                context.fillStyle = color;
+                context.rect(20,20,60,60);
+                context.fill();
+                init1=1;
+                color="red";
+            }
+            else{
+                context.beginPath();
+                context.arc(50,50,30,0,360,false);
+                context.fillStyle="red";//圆弧填充颜色
+                context.fill();//画实心圆
+                context.closePath();
+                init1=2;
+                color="black";
+            }
+            winyesorno();
+        }
+ 
+        //左二
+        if(x>=20&&x<=80&&y>=80&&y<=140){
+            if(init2==1||init2==2){
+                alert("已有棋子！");
+                return;
+            }
+            if(color=="black"){
+                context.beginPath();
+                context.fillStyle = color;
+                context.rect(20,80,60,60);
+                context.fill();
+                init2=1;
+                color="red";
+            }
+            else{
+                context.beginPath();
+                context.arc(50,110,30,0,360,false);
+                context.fillStyle="red";//圆弧填充颜色
+                context.fill();//画实心圆
+                context.closePath();
+                init2=2;
+                color="black";
+            }
+            winyesorno();
+        }
+        //左三
+        if(x>=20&&x<=80&&y>=160&&y<=200){
+            //alert("123");
+            if(init3==1||init3==2){
+                alert("已有棋子！");
+                return;
+            }
+            if(color=="black"){
+                context.beginPath();
+                context.fillStyle = color;
+                context.rect(20,140,60,60);
+                context.fill();
+                init3=1;
+                color="red";
+            }
+            else{
+                context.beginPath();
+                context.arc(50,170,30,0,360,false);
+                context.fillStyle="red";//圆弧填充颜色
+                context.fill();//画实心圆
+                context.closePath();
+                init3=2;
+                color="black";
+            }
+            winyesorno();
+        }
+ 
+        //中一
+        if(x>=80&&x<=140&&y>=20&y<=80){
+            if(init4==1||init4==2){
+                alert("已有棋子！");
+                return;
+            }
+            if(color=="black"){
+                context.beginPath();
+                context.fillStyle = color;
+                context.rect(80,20,60,60);
+                context.fill();
+                init4=1;
+                color="red";
+            }
+            else{
+                context.beginPath();
+                context.arc(110,50,30,0,360,false);
+                context.fillStyle="red";//圆弧填充颜色
+                context.fill();//画实心圆
+                context.closePath();
+                init4=2;
+                color="black";
+            }
+            winyesorno();
+        }
+ 
+        //中二
+        if(x>=80&&x<=140&&y>=80&&y<=140){
+            if(init5==1||init5==2){
+                alert("已有棋子！");
+                return;
+            }
+            if(color=="black"){
+                context.beginPath();
+                context.fillStyle = color;
+                context.rect(80,80,60,60);
+                context.fill();
+                init5=1;
+                color="red";
+            }
+            else{
+                context.beginPath();
+                context.arc(110,110,30,0,360,false);
+                context.fillStyle="red";//圆弧填充颜色
+                context.fill();//画实心圆
+                context.closePath();
+                init5=2;
+                color="black";
+            }
+            winyesorno();
+        }
+        //中三
+        if(x>=80&&x<=140&&y>=160&&y<=200){
+            if(init6==1||init6==2){
+                alert("已有棋子！");
+                return;
+            }
+            if(color=="black"){
+                context.beginPath();
+                context.fillStyle = color;
+                context.rect(80,140,60,60);
+                context.fill();
+                init6=1;
+                color="red";
+            }
+            else{
+                context.beginPath();
+                context.arc(110,170,30,0,360,false);
+                context.fillStyle="red";//圆弧填充颜色
+                context.fill();//画实心圆
+                context.closePath();
+                init6=2;
+                color="black";
+            }
+            winyesorno();
+        }
+ 
+        //右一
+        if(x>=140&&x<=200&&y>=20&y<=80){
+            if(init7==1||init7==2){
+                alert("已有棋子！");
+                return;
+            }
+            if(color=="black"){
+                context.beginPath();
+                context.fillStyle = color;
+                context.rect(140,20,60,60);
+                context.fill();
+                init7=1;
+                color="red";
+            }
+            else{
+                context.beginPath();
+                context.arc(170,50,30,0,360,false);
+                context.fillStyle="red";//圆弧填充颜色
+                context.fill();//画实心圆
+                context.closePath();
+                init7=2;
+                color="black";
+            }
+            winyesorno();
+        }
+ 
+        //右二
+        if(x>=140&&x<=200&&y>=80&&y<=140){
+            if(init8==1||init8==2){
+                alert("已有棋子！");
+                return;
+            }
+            if(color=="black"){
+                context.beginPath();
+                context.fillStyle = color;
+                context.rect(140,80,60,60);
+                context.fill();
+                init8=1;
+                color="red";
+            }
+            else{
+                context.beginPath();
+                context.arc(170,110,30,0,360,false);
+                context.fillStyle="red";//圆弧填充颜色
+                context.fill();//画实心圆
+                context.closePath();
+                init8=2;
+                color="black";
+            }
+            winyesorno();
+        }
+        //右三
+        if(x>=140&&x<=200&&y>=160&&y<=200){
+            if(init9==1||init9==2){
+                alert("已有棋子！");
+                return;
+            }
+            if(color=="black"){
+                context.beginPath();
+                context.fillStyle = color;
+                context.rect(140,140,60,60);
+                context.fill();
+                init9=1;
+                color="red";
+            }
+            else{
+                context.beginPath();
+                context.arc(170,170,30,0,360,false);
+                context.fillStyle="red";//圆弧填充颜色
+                context.fill();//画实心圆
+                context.closePath();
+                init9=2;
+                color="black";
+            }
+            winyesorno();
+        }
+ 
+    }
+ 
+            function winyesorno() {
+            if (init1 == init2 && init2 == init3) {
+                if (init1 == 2) {
+                    alert("红棋胜利！");
+                    draw();
+                }
+                if (init1 == 1) {
+                    alert("黑棋胜利！");
+                    draw();
+                }
+            }
+ 
+            if (init1 == init4 && init4 == init7) {
+                if (init1 == 2) {
+                    alert("红棋胜利！");
+                    draw();
+                }
+                if (init1 == 1) {
+                    alert("黑棋胜利！");
+                    draw();
+                }
+            }
+ 
+            if (init1 == init5 && init5 == init9) {
+                if (init1 == 2) {
+                    alert("红棋胜利！");
+                    draw();
+                }
+                if (init1 == 1) {
+                    alert("黑棋胜利！");
+                    draw();
+                }
+            }
+ 
+            if (init7 == init8 && init8 == init9) {
+                if (init7 == 2) {
+                    alert("红棋胜利！");
+                    draw();
+                }
+                if (init7 == 1) {
+                    alert("黑棋胜利！");
+                    draw();
+                }
+            }
+ 
+            if (init3 == init6 && init6 == init9) {
+                if (init3 == 2) {
+                    alert("红棋胜利！");
+                    draw();
+                }
+                if (init3 == 1) {
+                    alert("黑棋胜利！");
+                    draw();
+                }
+            }
+ 
+            if (init2 == init5 && init5 == init8) {
+                if (init2 == 2) {
+                    alert("红棋胜利！");
+                    draw();
+                }
+                if (init2 == 1) {
+                    alert("黑棋胜利！");
+                    draw();
+                }
+            }
+ 
+            if (init4 == init5 && init5 == init6) {
+                if (init4 == 2) {
+                    alert("红棋胜利！");
+                    draw();
+                }
+                if (init4 == 1) {
+                    alert("黑棋胜利！");
+                    draw();
+                }
+            }
+ 
+            if (init5 == init7 && init5 == init3) {
+                if (init5 == 2) {
+                    alert("红棋胜利！");
+                    draw();
+                }
+                if (init5 == 1) {
+                    alert("黑棋胜利！");
+                    draw();
+                }
+            }
+        }
+ 
+        function draw() {
+            context.fillStyle = "red"
+            context.fillRect(0, 0, 340, 400);
+            context.strokeStyle = "#006400";
+            context.textBaseline = "hanging";
+            context.font = "bold 40px '微软雅黑'";
+            context.strokeText("游戏结束！", 80, 80, 250);
+        }
+ 
+        function cnvs_clearCoordinates() {
+            document.getElementById("xycoordinates").innerHTML = "";
+        }
+ 
+        function init() {
+            context.moveTo(20, 20);
+            context.lineTo(200, 20);
+ 
+            context.moveTo(20, 80);
+            context.lineTo(200, 80);
+ 
+            context.moveTo(20, 140);
+            context.lineTo(200, 140);
+ 
+            context.moveTo(20, 200);
+            context.lineTo(200, 200);
+ 
+            context.moveTo(20, 20);
+            context.lineTo(20, 200);
+ 
+            context.moveTo(80, 20);
+            context.lineTo(80, 200);
+ 
+            context.moveTo(140, 20);
+            context.lineTo(140, 200);
+ 
+            context.moveTo(200, 20);
+            context.lineTo(200, 200);
+ 
+            context.stroke();
+ 
+            var color = "black";
+        }
+ 
+        function newstart() {
+ 
+            canvas.height = 300;
+            init();
+ 
+            init1 = 0;
+            init2 = 0;
+            init3 = 0;
+            init4 = 0;
+            init5 = 0;
+            init6 = 0;
+            init7 = 0;
+            init8 = 0;
+            init9 = 0;
+        }
+ 
+</script>
+<textarea rows="5" cols="20">游戏玩法：各个方向，哪方先连成三个同色形状的，为赢方，游戏结束。下满棋盘后，双方都没有达成三子成一条线的情况，属于和局。</textarea>
+<input type="button" onclick="newstart()" value="重新开始">
+<div id="xycoordinates"></div>
+ 
+</body>
+</html>
