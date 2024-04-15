@@ -1,0 +1,717 @@
+ 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>井字棋</title>
+    
+    <style>
+        .kk{float:left;width:20vw;height:20vw;border:1px solid black;border:1px solid grey;box-sizing:border-box;}
+    </style>
+</head>
+<body style="margin:0px;padding:0px;width:100%;height:100%;font-size:14px;">
+    
+    <!--提示框-->
+	<div id="tsk" style="display:none;height:auto;overflow:hidden;z-index:9999;position:fixed;top:30%;left:10%;right:10%;border:1px solid black;border-radius:10px;background:white;">
+		<div id="tsnr" style="padding:10px;text-align:center;font-size:14px;font-weight:bold;color:black;">
+			
+		</div>
+	</div>
+	
+    <script>
+	    //提示
+		function tsxs(nr){
+			document.getElementById("tsk").style.display="block";
+			document.getElementById("tsnr").innerHTML=nr;
+			function tsgb(){
+				document.getElementById("tsk").style.display="none";
+				document.getElementById("tsnr").innerHTML="";
+			}
+			setTimeout(tsgb,1500);
+			
+			return 1;
+		}
+	</script>
+	
+	<div onclick="ksyx()" style="position:fixed;z-index:2;top:10px;left:20%;right:20%;width:auto;height:30px;line-height:30px;border:1px solid black;border-radius:5px;background:white;text-align:center;">胜局：<span id="sj" style="color:red;"></span>  败局： <span id="bj" style="color:red;"></span> 平局：<span id="pj" style="color:red;"></span></div>
+	
+	<!--开始游戏-->
+	<div style="position:fixed;z-index:2;top:80vw;left:20vw;width:60px;height:30px;line-height:30px;border:1px solid black;border-radius:5px;background:white;text-align:center;">
+        <div id="yxks" onclick="ksyx()" style="display:block;width:100%;height:100%;">
+            游戏开始
+        </div>
+        
+        <div id="yxjs" onclick="jsyx()" style="display:none;width:100%;height:100%;">
+            游戏结束
+        </div>
+    </div>
+    
+    <!--选择框-->
+    <div id="xzk" style="display:none;position:fixed;z-index:2;top:30vw;left:20%;right:20%;width:auto;height:auto;border:2px solid black;border-radius:10px;background:white;text-align:center;">
+        <div style="width:100%;height:30px;line-height:30px;">请选择棋子</div>
+        <div onclick="wj='1',ds='2';xzqz()" style="margin:20px;border:1px solid black;height:30px;line-height:30px;border-radius:5px;background:black;color:white;">黑子</div>
+        <div onclick="wj='2',ds='1';xzqz()" style="margin:20px;border:1px solid black;height:30px;line-height:30px;border-radius:5px;background:red;color:white;">红子</div>
+    </div>
+    
+    
+    <!--切换ai-->
+	<div id="ai" onclick="dkxzk2()" style="position:fixed;z-index:2;top:80vw;right:20vw;width:60px;height:30px;line-height:30px;border:1px solid black;border-radius:5px;background:white;text-align:center;">
+	    AI:<span id="aicd" style="">初级</span>
+    </div>
+    
+     <!--选择框2-->
+    <div id="xzk2" style="display:none;position:fixed;z-index:2;top:30vw;left:20%;right:20%;width:auto;height:auto;border:2px solid black;border-radius:10px;background:white;text-align:center;">
+        <div style="width:100%;height:30px;line-height:30px;">请选择ai程度</div>
+        <div onclick="ai='1';qhai()" style="margin:20px;border:1px solid black;height:30px;line-height:30px;border-radius:5px;background:white;color:black;">初级</div>
+        <div onclick="ai='2';qhai()" style="margin:20px;border:1px solid black;height:30px;line-height:30px;border-radius:5px;background:white;color:black;">中级</div>
+        <div onclick="ai='3';qhai()" style="margin:20px;border:1px solid black;height:30px;line-height:30px;border-radius:5px;background:white;color:black;">高级</div>
+    </div>
+    
+    <!--遮挡框-->
+    <div id="zdk" onclick="zd()" style="display:none;position:fixed;z-index:2;top:60px;left:20vw;right:20vw;width:60vw;height:60vw;background:none;text-align:center;opacity:0.5;"></div>
+    
+    <!--棋盘-->
+    <div id="qp" style="margin:60px 20vw 0 20vw;width:60vw;height:60vw;overflow:hidden;" >
+    </div>
+    
+    <!--玩法-->
+    <div style="margin:100px 20px 0 20px;height:auto;">
+        <span style="font-size:15px;font-weight:bold;">井字棋玩法：</span><br>
+        各个方向，哪方先连成三个同色形状的，为赢方，游戏结束。下满棋盘后，双方都没有达成三子成一条线的情况，属于和局。
+    </div>
+ 
+    <script>
+        //查询胜负平数据
+        function cxsj(){
+            var a="",b="",c="";
+            var sj=localStorage.getItem("sj");
+            if(sj!=null){
+                a=sj;
+            }else{
+                a="0";
+            };
+            
+            var bj=localStorage.getItem("bj");
+            if(bj!=null){
+                b=bj;
+            }else{
+                b="0";
+            };
+            
+            var pj=localStorage.getItem("pj");
+            if(pj!=null){
+                c=pj;
+            }else{
+                c="0";
+            };
+            document.getElementById("sj").innerHTML=a;
+            document.getElementById("bj").innerHTML=b;
+            document.getElementById("pj").innerHTML=c;
+        }
+        cxsj();
+        
+        var wj="";//玩家
+        var ds="";//对手
+        var ai="1";//ai
+        var ksz=[];//框数组
+        var jsq="";
+        var jsq2="";
+        
+        //开始游戏
+        function ksyx(){
+            document.getElementById("xzk").style.display="block";
+            //切换为结束游戏按钮
+            qh();
+        }
+        //选择棋子
+        function xzqz(){
+            gjqp();
+            document.getElementById("xzk").style.display="none";
+            if(ds=="1"){
+                dj();
+                pdjs();
+            }else{
+                //clearTimeout(jsq2);
+            }
+        }
+        
+        //构建棋盘
+        function gjqp(){
+            let zh="";
+            for(let i=0;i<9;i++){
+                zh+='<div id="k'+i+'" onclick=\'dj("'+i+'","0");\' class="kk" style=""></div>';
+                ksz[i]="0";
+            }
+            document.getElementById("qp").innerHTML=zh;
+        }
+        
+        
+        //点击框
+        function dj(id,sfai){
+            if(id!=null){
+                if(sfai=="1"){
+                    //显示遮挡，避免再次ai未下，玩家再次点击
+                    document.getElementById("zdk").style.display="none";
+                }else{
+                    //关闭遮挡
+                    document.getElementById("zdk").style.display="block";
+                }
+                //tsxs(ksz[id]);
+                
+                if(ksz[id]!="0"){
+                    tsxs("已有棋子");
+                    //关闭遮挡
+                    document.getElementById("zdk").style.display="none";
+                }else{
+                    let ys="";
+                    
+                    if(sfai=="0"){
+                        ksz[id]=wj;
+                        
+                        if(wj=="1"){
+                            ys="black";
+                        }else{
+                            ys="red";
+                        }
+                        jsq=setTimeout(ab,200);
+                    }else{
+                        ksz[id]=ds;
+                        if(ds=="1"){
+                            ys="black";
+                        }else{
+                            ys="red";
+                        }
+                        
+                    }
+                    
+                    
+                    document.getElementById("k"+id).style.background=ys;
+                    
+                    //完成之后触发ai
+                    //判断是否胜利
+                    pdjj(sfai);
+                }
+            }else{
+                jsq=setTimeout(ab,200);
+            }
+        }
+        
+        //判断是否胜利,8种胜利条件,横三种，竖三种，斜两种
+        function pdjj(sfai){
+            //012
+            //345
+            //678
+            let jg="0";
+            
+            //012
+            if((ksz[0]==ksz[1])&&(ksz[1]==ksz[2])&&(ksz[0]!=0)&&(ksz[1]!=0)&&(ksz[2]!=0)){
+                jj(sfai);
+                jg="1";
+            }else{
+                //345
+                if((ksz[3]==ksz[4])&&(ksz[4]==ksz[5])&&(ksz[3]!=0)&&(ksz[4]!=0)&&(ksz[5]!=0)){
+                    jj(sfai);
+                    jg="1";
+                }else{
+                    //678
+                    if((ksz[6]==ksz[7])&&(ksz[7]==ksz[8])&&(ksz[6]!=0)&&(ksz[7]!=0)&&(ksz[8]!=0)){
+                        jj(sfai);
+                        jg="1";
+                    }else{
+                    
+                        //036
+                        if((ksz[0]==ksz[3])&&(ksz[3]==ksz[6])&&(ksz[0]!=0)&&(ksz[3]!=0)&&(ksz[6]!=0)){
+                            jj(sfai);
+                            jg="1";
+                        }else{
+                        
+                            //147
+                            if((ksz[1]==ksz[4])&&(ksz[4]==ksz[7])&&(ksz[1]!=0)&&(ksz[4]!=0)&&(ksz[7]!=0)){
+                                jj(sfai);
+                                jg="1";
+                            }else{
+                            
+                                //258
+                                if((ksz[2]==ksz[5])&&(ksz[5]==ksz[8])&&(ksz[2]!=0)&&(ksz[5]!=0)&&(ksz[8]!=0)){
+                                    jj(sfai);
+                                    jg="1";
+                                }else{
+                                
+                                    //048
+                                    if((ksz[0]==ksz[4])&&(ksz[4]==ksz[8])&&(ksz[0]!=0)&&(ksz[4]!=0)&&(ksz[8]!=0)){
+                                        jj(sfai);
+                                        jg="1";
+                                    }else{
+                                    
+                                        //246
+                                        if((ksz[2]==ksz[4])&&(ksz[4]==ksz[6])&&(ksz[2]!=0)&&(ksz[4]!=0)&&(ksz[6]!=0)){
+                                            jj(sfai);
+                                            jg="1";
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+                
+            return jg;
+        }
+        
+        
+        //结局
+        function jj(sfai){
+            let sz="";
+            if(sfai!=null){
+                if(sfai=="0"){
+                    sz="您";
+                    //写入数据
+                    var a=localStorage.getItem("sj");
+                    localStorage.setItem("sj",Number(a)+1);
+                }else{
+                    sz="AI";
+                    //写入数据
+                    var a=localStorage.getItem("bj");
+                    localStorage.setItem("bj",Number(a)+1);
+                }
+                tsxs(sz+"胜利！");
+            }else{
+                tsxs("平局！");
+                //写入数据
+                var a=localStorage.getItem("pj");
+                localStorage.setItem("pj",Number(a)+1);
+            }
+            
+            //棋盘不可点击
+            bkdj();
+            
+            //更新数据
+            cxsj();
+            
+            //关闭遮挡
+            document.getElementById("zdk").style.display="none";
+            
+            document.getElementById("yxks").innerHTML="再来一局";
+        }
+        
+        //棋盘不可点击
+        function bkdj(){
+            for(let i=0;i<ksz.length;i++){
+                document.getElementById("k"+i).onclick=function(){tsxs('游戏已结束，不可下子');};
+            }
+            //切换为开始游戏按钮
+            qh();
+            //关闭ai计时器
+            clearTimeout(jsq);
+        }
+        
+        //清空棋盘
+        function qkqp(){
+            document.getElementById('qp').innerHTML="";
+        }
+        
+        //主动结束游戏
+        function jsyx(){
+            tsxs("主动认输");
+            qkqp();
+            //写入数据
+            var a=localStorage.getItem("bj");
+            localStorage.setItem("bj",Number(a)+1);
+            //更新数据
+            cxsj();
+            
+            //切换为开始游戏按钮
+            qh();
+            //关闭遮挡
+            document.getElementById("zdk").style.display="none";
+            
+            //切换为初始状态
+            document.getElementById("yxks").innerHTML="开始游戏";
+        }
+        
+        //切换开始结束按钮
+        function qh(){
+            var a=document.getElementById("yxks").style.display;
+            if(a=="block"){
+                document.getElementById("yxjs").style.display="block";
+                document.getElementById("yxks").style.display="none";
+                //打开ai选择
+                document.getElementById("ai").onclick=function (){tsxs("游戏中，不可切换");};
+            }else{
+                document.getElementById("yxjs").style.display="none";
+                document.getElementById("yxks").style.display="block";
+                //打开ai选择
+                document.getElementById("ai").onclick=function (){dkxzk2();};
+            }
+        }
+        
+        
+        //判断可能胜利的条件,24种
+        function sltj(dx){
+            
+            let fh=[];
+            
+            //012
+            //345
+            //678
+            
+            //01
+            if((ksz[0]==ksz[1])&&(ksz[0]==dx)&&(ksz[1]==dx)&&(ksz[2]==0)){
+                fh.push(2);
+            }
+            //02
+            if((ksz[0]==ksz[2])&&(ksz[0]==dx)&&(ksz[2]==dx)&&(ksz[1]==0)){
+                fh.push(1);
+            }
+            //03
+            if((ksz[0]==ksz[3])&&(ksz[0]==dx)&&(ksz[3]==dx)&&(ksz[6]==0)){
+                fh.push(6);
+            }
+            //04
+            if((ksz[0]==ksz[4])&&(ksz[0]==dx)&&(ksz[4]==dx)&&(ksz[8]==0)){
+                fh.push(8);
+            }
+            //06
+            if((ksz[0]==ksz[6])&&(ksz[0]==dx)&&(ksz[6]==dx)&&(ksz[3]==0)){
+                fh.push(3);
+            }
+            //08
+            if((ksz[0]==ksz[8])&&(ksz[0]==dx)&&(ksz[8]==dx)&&(ksz[4]==0)){
+                fh.push(4);
+            }
+            
+            
+            //14
+            if((ksz[1]==ksz[4])&&(ksz[1]==dx)&&(ksz[4]==dx)&&(ksz[7]==0)){
+                fh.push(7);
+            }
+            //17
+            if((ksz[1]==ksz[7])&&(ksz[1]==dx)&&(ksz[7]==dx)&&(ksz[4]==0)){
+                fh.push(4);
+            }
+            
+            
+            //21
+            if((ksz[1]==ksz[2])&&(ksz[2]==dx)&&(ksz[1]==dx)&&(ksz[0]==0)){
+                fh.push(0);
+            }
+            //24
+            if((ksz[2]==ksz[4])&&(ksz[2]==dx)&&(ksz[4]==dx)&&(ksz[6]==0)){
+                fh.push(6);
+            }
+            //25
+            if((ksz[2]==ksz[5])&&(ksz[2]==dx)&&(ksz[5]==dx)&&(ksz[8]==0)){
+                fh.push(8);
+            }
+            //26
+            if((ksz[2]==ksz[6])&&(ksz[2]==dx)&&(ksz[6]==dx)&&(ksz[4]==0)){
+                fh.push(4);
+            }
+            //28
+            if((ksz[2]==ksz[8])&&(ksz[2]==dx)&&(ksz[8]==dx)&&(ksz[5]==0)){
+                fh.push(5);
+            }
+            
+            
+            //34
+            if((ksz[3]==ksz[4])&&(ksz[3]==dx)&&(ksz[4]==dx)&&(ksz[5]==0)){
+                fh.push(5);
+            }
+            //35
+            if((ksz[3]==ksz[5])&&(ksz[3]==dx)&&(ksz[5]==dx)&&(ksz[4]==0)){
+                fh.push(4);
+            }
+            
+            //54
+            if((ksz[5]==ksz[4])&&(ksz[5]==dx)&&(ksz[4]==dx)&&(ksz[3]==0)){
+                fh.push(3);
+            }
+            
+            //63
+            if((ksz[6]==ksz[3])&&(ksz[6]==dx)&&(ksz[3]==dx)&&(ksz[0]==0)){
+                fh.push(0);
+            }
+            //64
+            if((ksz[6]==ksz[4])&&(ksz[6]==dx)&&(ksz[4]==dx)&&(ksz[2]==0)){
+                fh.push(2);
+            }
+            //67
+            if((ksz[6]==ksz[7])&&(ksz[6]==dx)&&(ksz[7]==dx)&&(ksz[8]==0)){
+                fh.push(8);
+            }
+            //68
+            if((ksz[6]==ksz[8])&&(ksz[6]==dx)&&(ksz[8]==dx)&&(ksz[7]==0)){
+                fh.push(7);
+            }
+            
+            //74
+            if((ksz[7]==ksz[4])&&(ksz[7]==dx)&&(ksz[4]==dx)&&(ksz[1]==0)){
+                fh.push(1);
+            }
+            
+            //87
+            if((ksz[8]==ksz[7])&&(ksz[8]==dx)&&(ksz[7]==dx)&&(ksz[6]==0)){
+                fh.push(6);
+            }
+            //84
+            if((ksz[8]==ksz[4])&&(ksz[8]==dx)&&(ksz[4]==dx)&&(ksz[0]==0)){
+                fh.push(0);
+            }
+            //85
+            if((ksz[8]==ksz[5])&&(ksz[8]==dx)&&(ksz[5]==dx)&&(ksz[2]==0)){
+                fh.push(2);
+            }
+            
+            
+            
+            //返回可选择的数组
+            return fh;
+        }
+        
+        //创建胜利条件
+        function cjsltj(){
+            //012
+            //345
+            //678
+            let fh=[];
+            //01
+            if((ksz[0]==ds)&&(ksz[1]==0)&&(ksz[2]==0)){
+                fh.push(1);
+            }
+            //03
+            if((ksz[0]==ds)&&(ksz[3]==0)&&(ksz[6]==0)){
+                fh.push(3);
+            }
+            //04
+            if((ksz[0]==ds)&&(ksz[4]==0)&&(ksz[8]==0)){
+                fh.push(4);
+            }
+            
+            //14
+            if((ksz[1]==ds)&&(ksz[4]==0)&&(ksz[7]==0)){
+                fh.push(4);
+            }
+            
+            //21
+            if((ksz[2]==ds)&&(ksz[1]==0)&&(ksz[0]==0)){
+                fh.push(1);
+            }
+            //24
+            if((ksz[2]==ds)&&(ksz[4]==0)&&(ksz[6]==0)){
+                fh.push(4);
+            }
+            //25
+            if((ksz[2]==ds)&&(ksz[5]==0)&&(ksz[8]==0)){
+                fh.push(5);
+            }
+            
+            //34
+            if((ksz[3]==ds)&&(ksz[4]==0)&&(ksz[5]==0)){
+                fh.push(4);
+            }
+            
+            //54
+            if((ksz[5]==ds)&&(ksz[4]==0)&&(ksz[3]==0)){
+                fh.push(4);
+            }
+            
+            //63
+            if((ksz[6]==ds)&&(ksz[3]==0)&&(ksz[0]==0)){
+                fh.push(3);
+            }
+            //64
+            if((ksz[6]==ds)&&(ksz[4]==0)&&(ksz[2]==0)){
+                fh.push(4);
+            }
+            //67
+            if((ksz[6]==ds)&&(ksz[7]==0)&&(ksz[8]==0)){
+                fh.push(7);
+            }
+            
+            //74
+            if((ksz[7]==ds)&&(ksz[4]==0)&&(ksz[1]==0)){
+                fh.push(4);
+            }
+            
+            //87
+            if((ksz[8]==ds)&&(ksz[7]==0)&&(ksz[6]==0)){
+                fh.push(7);
+            }
+            //84
+            if((ksz[8]==ds)&&(ksz[4]==0)&&(ksz[0]==0)){
+                fh.push(4);
+            }
+            //85
+            if((ksz[8]==ds)&&(ksz[5]==0)&&(ksz[2]==0)){
+                fh.push(5);
+            }
+            
+            //fh=ds;
+            
+            //返回可选择的数组
+            return fh;
+        }
+        
+        //ai
+        function ab(){
+            var sysz=[];
+            for(let i=0;i<ksz.length;i++){
+                if(ksz[i]==0){
+                    sysz.push(i);
+                }
+            }
+            
+            //如果剩余可点击的格子为零，说明结束，平局
+            if(sysz.length=="0"){
+                //写入平局
+                let jg=pdjj();
+                if(jg=="1"){
+                    jj(1);
+                }else{
+                    jj();
+                }
+                //tsxs("结束");
+            }else{
+                //低级ai，随机下
+                if(ai=="1"){
+                    //Math.floor(Math.random() * arrStr.length)
+                    let a=Math.floor(Math.random()*sysz.length);
+                    dj(sysz[a],1);
+                    
+                }
+                //中级ai，阻止玩家胜利
+                if(ai=="2"){
+                    //检测玩家可能胜利的情况
+                    let b=sltj(wj);
+                    
+                    let c="";
+                    if(b.length!="0"){
+                        //存在多种可能时，随机选择一个
+                        c=b;
+                    }else{
+                        c=sysz;
+                    }
+                    
+                    let a=Math.floor(Math.random()*c.length);
+                    dj(c[a],1);
+                }
+                //高级ai，阻止玩家，优先自己胜利
+                if(ai=="3"){
+                    
+                    let b=sltj(wj);
+                    //alert("玩家胜利条件："+b);
+                    
+                    let d=sltj(ds);
+                    //alert("ai胜利条件："+d);
+                    
+                    
+                    
+                    
+                    
+                    if(b.length!="0"){
+                        if(d.length=="0"){
+                            let a=Math.floor(Math.random()*b.length);
+                            dj(b[a],1);
+                        }else{
+                            //取重复值，即双方都可能胜利的选项
+                            function compare(arr1, arr2) {
+                              return arr1.filter((v) => {
+                                return arr2.includes(v);
+                              });
+                            }
+                            
+                            let e=compare(b,d);
+                            //alert("最有可能胜利："+e);
+                            
+                            if(d.length!="0"&&e.length=="0"){
+                                //存在多种可能时，随机选择一个,出现多个选项时必输
+                                let a=Math.floor(Math.random()*d.length);
+                                dj(d[a],1);
+                            }else{
+                                //存在多种可能时，随机选择一个,出现多个选项时必输
+                                let a=Math.floor(Math.random()*e.length);
+                                dj(e[a],1);
+                            }
+                            
+                        }
+                    }else{
+                        //不存在相连的情况
+                        let e=cjsltj();
+                        
+                        if(e.length!="0"){
+                            //alert(e);
+                            //创建胜利条件
+                            let a=Math.floor(Math.random()*e.length);
+                            dj(e[a],1);
+                            //tsxs("已创建有利");
+                        }else{
+                            //alert(e);
+                            //无胜利条件，随机选一个
+                            let a=Math.floor(Math.random()*sysz.length);
+                            dj(sysz[a],1);
+                        }
+                    }
+                    
+                    
+                    //查询玩家是否有胜利条件，无的话，随机或者创建胜利条件
+                    
+                }
+            }
+        }
+        
+        function zd(){
+            tsxs("请等待ai下子");
+        }
+        
+        //打开关闭ai选择框
+        function dkxzk2(){
+            document.getElementById("xzk2").style.display="block";
+        }
+        function gbxzk2(){
+            document.getElementById("xzk2").style.display="none";
+        }
+        
+        //切换ai
+        function qhai(){
+            if(ai=="1"){
+                document.getElementById("aicd").innerHTML="初级";
+            }
+            if(ai=="2"){
+                document.getElementById("aicd").innerHTML="中级";
+            }
+            if(ai=="3"){
+                document.getElementById("aicd").innerHTML="高级";
+            }
+            tsxs("切换成功");
+            document.getElementById("xzk2").style.display="none";
+        }
+        
+        
+        function pdjs(){
+            var sysz=[];
+            for(let i=0;i<ksz.length;i++){
+                if(ksz[i]==0){
+                    sysz.push(i);
+                }
+            }
+            
+            if(sysz.length=="0"){
+                
+                dj();
+                
+                clearTimeout(jsq2);
+            }else{
+                jsq2=setTimeout(pdjs,500);
+            }
+        }
+    
+    </script>
+ 
+    
+</body>
+</html>
