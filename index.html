@@ -151,7 +151,7 @@ function showTime(clock){
     month = month+1;
     var arr_work = new Array("周日","周一","周二","周三","周四","周五","周六");
     var week = arr_work[ now.getDay()];
-    var time = year+"-"+month+"-"+day+" "+ week+" "+hour+":"+minu+":"+second+":";
+    var time = year+"-"+month+"-"+day+" "+ week+" "+hour+":"+minu+":"+second+"";
     clock.innerHTML=""+time;
 }
 window.onload = function(){
@@ -698,10 +698,7 @@ blinkredlink()
 <!--BEGIN OF WEBSITE BODY-->
 <p id="clock" style="background:#000000" align="center"><font color="#FF0000">No JavaScript</font></p>
 <noscript>
-<span id="blinkred"><h2><font color="red">无法使用 JavaScript</h2></span>
-<li>未启用<s>或无法使用</s> JavaScript ，所有特效以及部分按钮将无法工作</font></li>
-<li>Q:如何启用？│A:浏览器设置>>>网页设置/设定>>>JavaScript 并启用该选项即可</li>
-<hr></hr>
+<h2><font color="#FF0000">JavaScript Disabled</font></h2>
 </noscript>
 <div class="head_title">
 <h1 align="center">minqwq 个人网站</h1>
