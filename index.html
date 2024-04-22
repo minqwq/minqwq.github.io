@@ -140,6 +140,27 @@ body {
 
 <!--BEGIN OF COPY AND PASTE-->
 <script>
+function showTime(clock){
+    var now = new Date();
+    var year = now.getFullYear();
+    var month= now.getMonth();
+    var day = now.getDate();
+    var hour = now.getHours();
+    var minu = now.getMinutes();
+    var second = now.getSeconds();
+    month = month+1;
+    var arr_work = new Array("周日","周一","周二","周三","周四","周五","周六");
+    var week = arr_work[ now.getDay()];
+    var time = year+"-"+month+"-"+day+" "+ week+" "+hour+":"+minu+":"+second+":";
+    clock.innerHTML=""+time;
+}
+window.onload = function(){
+    var clock = document.getElementById("clock");
+    window.setInterval("showTime(clock)",1000);
+  
+}
+</script>
+<script>
     var now = new Date();
     function createtime(){ var grt= new Date("02/06/2024 16:30:00");//修改建站时间
     now.setTime(now.getTime()+250);
@@ -675,7 +696,7 @@ blinkredlink()
 <!--RED BLACK ALTERNATE-->
 <!--END OF COPY AND PASTE-->
 <!--BEGIN OF WEBSITE BODY-->
-<marquee bgcolor="#000000" scrollamount="7"><font color="#FF0000">呀！…啊…不行…要……坏掉…唔诶！不行……！要…要变得…奇怪了……</font></marquee>
+<p id="clock" style="background:#000000" align="center"><font color="#FF0000">No JavaScript</font></p>
 <noscript>
 <span id="blinkred"><h2><font color="red">无法使用 JavaScript</h2></span>
 <li>未启用<s>或无法使用</s> JavaScript ，所有特效以及部分按钮将无法工作</font></li>
@@ -788,12 +809,14 @@ function myFunction(){
 <details>
 <summary>网站地图</summary>
 <a href="http://minqwq.github.io/updatehistory.html">网站更新历史</a><br></br>
-<a href="http://minqwq.github.io/calc.html">计算器</a><br></br>
 <a href="http://minqwq.github.io/anonymsgboard/error.html">留言板</a><br></br>
 <a href="http://minqwq.github.io/archivelist.html">存档一览</a><br></br>
 <a href="http://minqwq.github.io/magic1.html">魔法圈</a><br></br>
 <a href="http://minqwq.github.io/cpstest/index.html">CPS测试</a><br></br>
 <a href="http://minqwq.github.io/mymusic.html">在线聆听我制作的所有音乐</a>
+<hr />
+<p><small>工具</small></p>
+<a href="http://minqwq.github.io/calc.html">计算器</a><br></br>
 <hr />
 <p><small>合集</small></p>
 <a href="http://minqwq.github.io/nanbeng_collection/index.html">难绷合集</a><br></br>
