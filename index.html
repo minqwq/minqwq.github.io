@@ -47,6 +47,19 @@ hr {
 	timerID = setTimeout("newtext()", 200)
 	}
 	</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+            // 获取用户浏览器语言
+            const userLanguage = window.navigator.language;
+            console.log('User Launguage Checking OK!');
+            console.log('User Launguage is:', userLanguage);
+            // 重定向到相应语言的页面
+            // window.location.href = `./index.ja.html`;
+            if (userLanguage == 'en-US' || userLanguage == 'en') {
+                window.location.href = `./index_en.html`;
+            }else if (userLanguage !== 'zh-CN' && userLanguage !== 'zh') {
+                window.location.href = `./index.html`;
+</script>
 <!--END OF COPY AND PASTE-->
 </head>
 <body style="background-color: #B0B0B0;color: #FFFFFF;" onload="newtext()">
