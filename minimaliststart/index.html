@@ -6,7 +6,7 @@
 </head>
 <body style="background-color: #000000;color: #00FF00;">
 
-<marquee bgcolor="#000000" scrollamount="7"><font color="#00FF00">暂无新闻</font></marquee>
+<marquee bgcolor="#000000" scrollamount="7"><font color="#00FF00">Minimalist Start 2024-06-01更新:搜索框和搜索按钮换行的问题已经修复，并优化了其大小和位置以便中年人与老年人的使用</font></marquee>
 <h2 align="center">Minimalist Start</h2>
 <style>
 #clock{
@@ -18,6 +18,21 @@
     text-align: center;
     font: regular;
     color: #00FF00;
+}
+</style>
+<style>
+#search{
+    width: 250px;
+    height: 25px;
+}
+</style>
+<style>
+#search_button{
+    width: 75px;
+    height: 31px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
 }
 </style>
 <script>
@@ -43,14 +58,16 @@ window.onload = function(){
 </script>
 <div id ="clock"></div>
 <hr></hr>
+<center>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓ 点这个白框输入搜索内容</p>
 <form action="http://cn.bing.com/search" method="get" style="white-space: nowrap">
 <div>
-<label for="search"><a href="http://cn.bing.com.com">Bing</a></label>
-<input name="q" id="search" value="" align="center" placeholder="点我输入搜索内容"><div><button align="center">     搜索     </button></div>
+<label for="search"><a href="http://cn.bing.com.com"></a></label>
+<input name="q" id="search" value="" align="center" placeholder="点我输入搜索内容"><button align="center" id="search_button">     搜索     </button><div></div>
 </div>
 </form>
-<p>↑ 点这里搜索</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点这里搜索 ↑</p>
+</center>
 <p>留空以进入Bing起始页</p>
 <a href="http://minqwq.github.io">©LR Studio 2022--2024 Open Source Repository</a>
 
