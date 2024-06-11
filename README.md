@@ -1,2 +1,3 @@
 welcome to minqwq's official site!!!
-http://minqwq.github.io
+<s>http://minqwq.github.io</s>  
+http://www.minqwq.us.kg
