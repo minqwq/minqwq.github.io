@@ -1,0 +1,83 @@
+/* 优化用 */
+ul, li {/*清除ul自带的列表符*/
+  list-style: none;
+}
+img {/*去掉img自带的边框<当图像加上a标签后，IE浏览器在不去除图像边框时会显示边框>*/
+  border: none;
+}
+html {
+  height:100%;
+}
+body {
+  min-height: 100%;
+  position: relative;
+}
+
+/* 分割线样式 */
+hr {
+  border: none;
+  border-top: 3px double #333;
+  color: #333;
+  overflow: visible;
+  text-align: center;
+  height: 5px;
+}
+
+/* 已停用:标题样式
+.head_title {
+  border: 5px outset #0088FF;
+  background-color: #242424;    
+  text-align: center;
+}
+*/
+
+/* 显示滚动条 */
+overflow-y: scroll;
+
+/* 修改链接文字样式 */
+a:link {
+color:#FFFFFF;
+}
+a:visited {
+	color:#000000;
+}
+a:hover {
+	color:#888888;
+}
+a:active {
+	color:#FFFFFF;
+}
+
+/* 添加可用字体 */
+@font-face { 
+    font-family: 'Unifont';  
+    src: url('unifont.ttf') format('truetype'); 
+}
+@font-face { 
+    font-family: 'TorusPro';  
+    src: url('TorusPro-Regular.ttf') format('truetype'); 
+}
+@font-face {
+    font-family: '宋体';
+    src: url('宋体.ttf')
+format('truetype');
+}
+
+/* 用其字体 */
+body {
+    font-family: 'TorusPro';
+}
+
+/* 背景颜色(疑似无效) */
+body {
+  background: #fff;
+}
+
+/* 无效:details大小
+details {
+       border: 24px;
+}
+summary {
+       border: 24px;
+}
+*/
