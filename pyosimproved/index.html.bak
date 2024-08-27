@@ -11,7 +11,7 @@
 <p class="cyan">Last updated:2024-08-26(GMT+8)</p>
 <p align="center" class="red">----------------------------------------------</p>
 <p>PY OS Improved is a "Operating System" written using Python 3.<br />Based on AMDISYES's <a href="https://github.com/AMDISYES/pyos_core">pyos_core</a></p>
-<img src="./pyosi_logo.png" /><img src="./pwdbypy3.png" />
+<img src="./pyosi_logo.png" width="65" height="32" /><img src="./pwdbypy3.png" width="65" height="32" />
 <p align="center" class="red">----------------------------------------------</p>
 <p class="h1">Downloads</p>
 <a href="https://github.com/minqwq/pyos-improved">GitHub</a><br /><br />
