@@ -1,0 +1,82 @@
+@font-face {
+    font-family: 'ibmvga';
+    src: url('ibmvga.ttf')
+format('truetype');
+}
+
+body {
+    font-family: 'ibmvga'
+}
+
+hr {
+    color: cyan;
+}
+
+p {
+    margin: 0;
+    color: #aaa;
+}
+
+a:link {
+	color: #0ff;
+}
+a:visited {
+	color: #0aa;
+}
+a:hover {
+	color: #aa0;
+}
+a:active {
+	color: #ff0;
+}
+
+hr.new1 {
+  border-top: 1px solid red;
+}
+
+.h1 {
+    color: #c60;
+}
+.lightwhite {
+    color: #fff;
+}
+.lightgreen {
+    color: #0f0;
+}
+.lightyellow {
+    color: #ff0;
+}
+.lightcyan {
+    color: #0ff
+}
+.lightmagenta {
+    color: #f0f;
+}
+.lightred {
+    color: #f00;
+}
+.lightblue {
+    color: #00f;
+}
+.blue {
+    color: #00a;
+}
+.yellow {
+    color: #aa0;
+}
+.green {
+    color: #0a0;
+}
+.red {
+    color: #a00;
+}
+.cyan {
+    color: #0aa;
+}
+.magenta {
+    color: #a0a;
+}
+
+.revbg {
+    background: #aaa;
+    color: #000
