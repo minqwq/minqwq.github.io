@@ -1,27 +1,7 @@
-Other things
+2024-09-05
+yyyy mm dd
 
-2024-08-11
-y    m  d 
-
-I found a new cool vtuber style logo collection
-https://github.com/murimurikyu/CuteVtubingThing
-I'm very very like this
-and if you like this too you can star it
+1.1.2 is released!
+https://github.com/minqwq/pyos-improved/releases/tag/v1.1.2
 
 --minqwq
-
-
-
-PY OS Improved Latest News
-
-2024-08-19
-y    m  d 
-
-We released the v1.0 of PY OS Improved yesterday
-What feature you want added in next version?(1.0.1)
-email me:minqwq723897@outlook.com
-qq me:1617195774
-
---minqwq
-
-full of love and water and fan
