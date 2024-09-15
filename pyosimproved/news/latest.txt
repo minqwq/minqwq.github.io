@@ -1,7 +1,5 @@
-2024-09-05
-yyyy mm dd
-
-1.1.2 is released!
-https://github.com/minqwq/pyos-improved/releases/tag/v1.1.2
+2024-09-15 GMT+8 PM 1:22
+MeltedIce(AMDISYES) Maybe exit the internet in today
+We hope this is not real...
 
 --minqwq
