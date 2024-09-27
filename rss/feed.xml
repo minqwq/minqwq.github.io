@@ -3,11 +3,11 @@
 
 <channel>
   <title>minqwq -- rss</title>
-  <description>minqwq个人网站的rss频道</description>
+  <description>minqwq's rss channel!</description>
   <item>
-    <title>这是第一个rss新闻</title>
-    <description>idk what can i say</description>
-    <link>http://minqwq.github.io</link>
+    <title>PY OS Improved 1.2.2 R2 Release Preview</title>
+    <description>Introducing the PY OS Improved v1.2.2_R2<br />Some apps added tips then help you how to exit<br />Commands list update:color changed to white and add some warn for "ready for delete" apps</description>
+    <link>None.</link>
   </item>
 </channel>
 
