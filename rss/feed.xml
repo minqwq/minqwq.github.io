@@ -1,7 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" ?>                          <rss version="2.0">                                                                                                               <channel>                                              <title>AYA News | From Gensokyo to Earth...</title>
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+<channel>
+  <title>AYA News | From Gensokyo to Earth...</title>
   <description>ayaya</description>
   <item>
-    <title>No title</title>                                          <description>No news in today</description>
+    <title>No title</title>
+    <description>No news in today</description>
     <link>None.</link>
   </item>
 </channel>
