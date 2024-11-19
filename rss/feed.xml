@@ -5,10 +5,11 @@
   <description>ayaya!</description>
   <item>
     <title>Advertisement</title>
-    <description>No advertisement now</description>
+    <description>No advertisement now<br></br></description>
     <description>If you want add here, contact minqwq723897@outlook.com</description>
     <link>mailto://minqwq723897@outlook.com</link>
-    
+  </item>
+  <item>
     <title>No title</title>
     <description>No news in today</description>
     <link>None.</link>
