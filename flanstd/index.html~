@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta charset="utf-8">
+<title>Flandre Studio ~ From past, To the present, For future...</title>
+</head>
+<body>
+
+<table style="width: 100%;" border="0">
+<tr>
+    <td style="width: 29%;">
+        <a href="./donated.html">捐款列表</a><br />
+        <a href="../index.html">Yartmin Scarlet 个人网站</a>
+        <hr />
+        <p>如果您要在您的网站上添加我个人社团的链接，
+        请使用这张图<img src="./banner.png" width="200" height="40">
+        <b>&lt;img src="http://main.minqwq.moe/flanstd/banner.png" width="200" height="40"&gt;</b>，嵌套在<b>&lt;a&gt;</b>内即可。</p>
+    </td>
+    <td style="width: 1%;"></td>
+    <td style="width: 70%;">
+        <h2>Flandre Studio</h2>
+        <small><p>-- 来自从前，来到现在，用于未来...</p></small>
+        <hr />
+        <h3>&lt;Flandre Studio Latest News&gt;</h3>
+		<p>2025/08/11 无话可说daze*</p><br />
+        <h3>&lt;Projects&gt;</h3>
+        <p>PY OS Improved -- 一个类dos的假操作系统，用 Python 3 语言开发。 <a href="https://github.com/minqwq/pyos-improved">(link)</a><br />
+        （暂时没有别的了，以后补上吧...）</p>
+    </td>
+</tr>
+</table>
+
+<hr />
+
+<table style="width: 100%;">
+<tr>
+    <td style="width: 70%;">
+        <small><i><p>(C)opyright Flandre Studio 2025--2026 All rights reserved.<br />
+        (C)opyright LR Studio 2022--2025 All rights reserved.</p></i></small>
+    </td>
+    <td style="width: 30%;">
+        <small><p>Website by <a href="http://main.minqwq.moe">Yartmin Scarlet</a>.<br />
+        Hosting by GitHub Pages<br />
+        Domain by Hanson<br />
+        Thank's for the supporting.</p></small>
+    </td>
+</tr>
+</table>
+
+<style>
+body {
+    color: #e8f8ff;
+    background: #000000;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+p {
+    margin: 0;
+}
+
+b {
+    color: #ffa3d8;
+}
+
+td {
+    vertical-align: top;
+}
+
+a:link {
+    color: #ffffff;
+    margin-top: -20;
+}
+
+a:visited {
+    color: #dddddd;
+    margin-top: -20;
+}
+
+a:active {
+    color: #cccccc;
+    margin-top: -20;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+</style>
+
+</body>
+</html>
