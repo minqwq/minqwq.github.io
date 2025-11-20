@@ -1,0 +1,40 @@
+body {
+    color: #e8f8ff;
+    background: #000000;
+    background-image: url('http://yartmin.moerain.site/background_workspace.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+p {
+    margin: 0;
+}
+
+b {
+    color: #ffa3d8;
+}
+
+td {
+    vertical-align: top;
+}
+
+a:link {
+    color: #ffffff;
+    margin-top: -20;
+}
+
+a:visited {
+    color: #dddddd;
+    margin-top: -20;
+}
+
+a:active {
+    color: #cccccc;
+    margin-top: -20;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
