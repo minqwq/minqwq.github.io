@@ -1,14 +1,13 @@
 body {
     color: #e8f8ff;
     background: #000000;
-    background-image: url('http://yartmin.moerain.site/background_workspace.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    background-attachment: fixed;
 }
 
-p {
+table {
+    color: #e8f8ff;
+}
+
+p, u {
     margin: 0;
 }
 
@@ -18,6 +17,10 @@ b {
 
 td {
     vertical-align: top;
+}
+
+th {
+    color: #ffa3d8;
 }
 
 a:link {
