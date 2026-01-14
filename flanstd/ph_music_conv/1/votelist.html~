@@ -1,0 +1,57 @@
+<<<<<<< HEAD
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>幻想音乐大会 - 投票概览</title>
+<link rel="stylesheet" type="text/css" href="../../../lib/css/th_style.css" media="all">
+</head>
+<body>
+
+<center><table border="0" style="width: 1024px; max-width: 1024px;"></center><tr><td style="width: 100%; vertical-align: top;">
+
+
+<h1>幻想音乐大会<font size="3"> ~ 1th Project of Phantasm Music Convention.</font></h1>
+<h2>&nbsp;</h2><!-- use this instead of bold hr line -->
+<h3>■ 投票概览</h3>
+<table border="0" style="width: 100%;">
+<tr bgcolor="#9bffff"><td>曲名</td><td>作曲人</td><td>类型</td><td>票数</td><td>曲师留言</td><td>ID</td><tr>
+<tr bgcolor="#eeeeee"><td>後戸の国の静かな時間</td><td>Yartmin Scarlet</td><td>Travel</td><td>0</td><td>后面那段感觉好悲伤（</td><td>3</td>
+<tr bgcolor="#eeeeee"><td>ヴォヤージュ1969 ~ Trance Mix</td><td>Yartmin Scarlet</td><td>Travel Trance</td><td>0</td><td>很有宇宙感的一首呢</td><td>2</td>
+<tr bgcolor="#eeeeee"><td>Complete Darkness</td><td>Yartmin Scarlet</td><td>类红魔乡风</td><td>0</td><td>希腊奶</td><td>1</td></tr>
+</table>
+<a href="./index.html">返回</a>
+
+</td></tr></table>
+
+</body>
+</html>
+=======
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>幻想音乐大会 - 投票概览</title>
+<link rel="stylesheet" type="text/css" href="../../../lib/css/th_style.css" media="all">
+</head>
+<body>
+
+<center><table border="0" style="width: 1024px; max-width: 1024px;"></center><tr><td style="width: 100%; vertical-align: top;">
+
+
+<h1>幻想音乐大会<font size="3"> ~ 1th Project of Phantasm Music Convention.</font></h1>
+<h2>&nbsp;</h2><!-- use this instead of bold hr line -->
+<h3>■ 投票概览</h3>
+<table border="0" style="width: 100%;">
+<tr bgcolor="#9bffff"><td>曲名</td><td>作曲人</td><td>类型</td><td>票数</td><td>曲师留言</td><td>ID</td><tr>
+<tr bgcolor="#eeeeee"><td>後戸の国の静かな時間</td><td>Yartmin Scarlet</td><td>Travel</td><td>0</td><td>后面那段感觉好悲伤（</td><td>3</td>
+<tr bgcolor="#eeeeee"><td>ヴォヤージュ1969 ~ Trance Mix</td><td>Yartmin Scarlet</td><td>Travel Trance</td><td>0</td><td>很有宇宙感的一首呢</td><td>2</td>
+<tr bgcolor="#eeeeee"><td>Complete Darkness</td><td>Yartmin Scarlet</td><td>类红魔乡风</td><td>0</td><td>希腊奶</td><td>1</td></tr>
+</table>
+<a href="./index.html">返回</a>
+
+</td></tr></table>
+
+</body>
+</html>
+>>>>>>> bdfc66e7427631f88962c11bb8ba0c3598c23a05
