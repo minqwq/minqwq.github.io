@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Feature Test — 兼容性检测</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",Helvetica,Arial;line-height:1.5;margin:18px}
+    table{border-collapse:collapse;width:100%;max-width:1200px}
+    th,td{border:1px solid #ddd;padding:8px;text-align:left}
+    th{background:#f6f7fa}
+    .ok{color:green;font-weight:600}
+    .no{color:#c00;font-weight:600}
+    .note{color:#555;font-size:0.9em}
+    header{margin-bottom:12px}
+    .controls{margin:12px 0;display:none}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Feature Test — 浏览器特性兼容性检测</h1>
+    <p class="note">该页面检测尽可能多的现代 Web 特性（以 API 或能力存在为准）。某些功能需要安全上下文或额外权限，检测仅判定 API 是否存在。</p>
+  </header>
+
+  <div class="controls">
+    <button id="run">Run Tests</button>
+    <button id="rerun">Rerun</button>
+  </div>
+
+  <table id="results">
+    <thead>
+      <tr><th>功能</th><th>是否支持</th><th>返回提示</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    var tbody = document.querySelector('#results tbody');
+    function row(name, res, note){
+      note = note || '';
+      var tr = document.createElement('tr');
+      var a = document.createElement('td'); a.textContent = name;
+      var b = document.createElement('td'); b.innerHTML = res ? '<span class="ok">是</span>' : '<span class="no">否</span>';
+      var c = document.createElement('td'); c.textContent = note;
+      tr.appendChild(a); tr.appendChild(b); tr.appendChild(c);
+      tbody.appendChild(tr);
+    }
+
+    function tryCall(fn){ try{ return !!fn(); }catch(e){ return false; } }
+
+    var tests = [
+      ['HTML5 semantic elements', function(){ return document.createElement('main') instanceof HTMLElement; }],
+      ['<dialog> element', function(){ return 'HTMLDialogElement' in window; }],
+      ['input type=date', function(){ var i=document.createElement('input'); i.type='date'; return i.type==='date'; }],
+      ['input type=color', function(){ var i=document.createElement('input'); i.type='color'; return i.type==='color'; }],
+      ['Canvas 2D', function(){ return !!(document.createElement('canvas').getContext && document.createElement('canvas').getContext('2d')); }],
+      ['WebGL', function(){ var c=document.createElement('canvas'); return !!(c.getContext && (c.getContext('webgl')||c.getContext('experimental-webgl'))); }],
+      ['WebGL2', function(){ var c=document.createElement('canvas'); return !!(c.getContext && c.getContext('webgl2')); }],
+      ['WebAudio API', function(){ return ('AudioContext' in window || 'webkitAudioContext' in window); }],
+      ['WebAssembly', function(){ return typeof WebAssembly === 'object' || typeof WebAssembly === 'function'; }],
+      ['Service Worker (API)', function(){ return 'serviceWorker' in navigator; }],
+      ['Push API', function(){ return 'PushManager' in window; }],
+      ['Notifications API', function(){ return 'Notification' in window; }],
+      ['Geolocation', function(){ return 'geolocation' in navigator; }],
+      ['Vibration API', function(){ return 'vibrate' in navigator; }],
+      ['DeviceOrientation Event', function(){ return 'DeviceOrientationEvent' in window; }],
+      ['Battery API (navigator.getBattery)', function(){ return 'getBattery' in navigator; }],
+      ['LocalStorage', function(){ try{ localStorage.setItem('__ft', '1'); localStorage.removeItem('__ft'); return true; }catch(e){ return false; } }],
+      ['IndexedDB', function(){ return 'indexedDB' in window; }],
+      ['Cache API', function(){ return 'caches' in window; }],
+      ['Fetch API', function(){ return 'fetch' in window; }],
+      ['Streams API (ReadableStream)', function(){ return 'ReadableStream' in window; }],
+      ['Web Crypto (Subtle)', function(){ return ('crypto' in window && 'subtle' in window.crypto); }],
+      ['Speech Synthesis', function(){ return 'speechSynthesis' in window; }],
+      ['Speech Recognition (webkit/SpeechRecognition)', function(){ return ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window); }],
+      ['WebXR', function(){ return 'xr' in navigator; }],
+      ['WebGPU', function(){ return 'gpu' in navigator; }],
+      ['Clipboard API (write/read)', function(){ return 'clipboard' in navigator; }],
+      ['File System Access (showOpenFilePicker)', function(){ return 'showOpenFilePicker' in window || 'chooseFileSystemEntries' in window; }],
+      ['Media Devices (getUserMedia)', function(){ return ('mediaDevices' in navigator && ('getUserMedia' in navigator.mediaDevices || 'getUserMedia' in navigator)); }],
+      ['getDisplayMedia', function(){ return ('mediaDevices' in navigator && 'getDisplayMedia' in navigator.mediaDevices); }],
+      ['WebSocket', function(){ return 'WebSocket' in window; }],
+      ['SharedArrayBuffer', function(){ return 'SharedArrayBuffer' in window; }],
+      ['OffscreenCanvas', function(){ return 'OffscreenCanvas' in window; }],
+      ['CSS Variables', function(){ return typeof CSS !== 'undefined' && CSS.supports && CSS.supports('--a','0'); }],
+      ['CSS Grid', function(){ return typeof CSS !== 'undefined' && CSS.supports && (CSS.supports('display','grid')||CSS.supports('display','-ms-grid')); }],
+      ['backdrop-filter', function(){ return typeof CSS !== 'undefined' && CSS.supports && (CSS.supports('backdrop-filter','blur(1px)')||CSS.supports('-webkit-backdrop-filter','blur(1px)')); }],
+      ['CSS.registerProperty (Houdini)', function(){ return typeof CSS !== 'undefined' && 'registerProperty' in CSS; }],
+      ['IntersectionObserver', function(){ return 'IntersectionObserver' in window; }],
+      ['ResizeObserver', function(){ return 'ResizeObserver' in window; }],
+      ['MutationObserver', function(){ return 'MutationObserver' in window; }],
+      ['Pointer Events', function(){ return 'onpointerdown' in window; }],
+      ['Pointer Lock API', function(){ return ('pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document); }],
+      ['Fullscreen API', function(){ return document.fullscreenEnabled || document.webkitFullscreenEnabled || document.mozFullScreenEnabled; }],
+      ['Picture-in-Picture', function(){ return document.pictureInPictureEnabled || 'pictureInPictureEnabled' in document; }],
+      ['Payment Request API', function(){ return 'PaymentRequest' in window; }],
+      ['BroadcastChannel', function(){ return 'BroadcastChannel' in window; }],
+      ['SharedWorker', function(){ return 'SharedWorker' in window; }],
+      ['requestIdleCallback', function(){ return 'requestIdleCallback' in window; }],
+      ['Performance API (performance.now)', function(){ return !!(window.performance && performance.now); }],
+      ['Intl API', function(){ return typeof Intl === 'object'; }],
+      ['BigInt', function(){ return typeof BigInt === 'function'; }],
+      ['WebAssembly threads (Atomics)', function(){ return 'Atomics' in window && 'SharedArrayBuffer' in window; }],
+      ['WebAuthn (credentials)', function(){ return 'credentials' in navigator && 'create' in navigator.credentials; }],
+      ['Web Bluetooth (navigator.bluetooth)', function(){ return 'bluetooth' in navigator; }],
+      ['WebNFC (navigator.nfc)', function(){ return 'nfc' in navigator; }],
+      ['Web MIDI (navigator.requestMIDIAccess)', function(){ return 'requestMIDIAccess' in navigator; }],
+      ['Web Locks API', function(){ return 'locks' in navigator; }],
+      ['File API (FileReader)', function(){ return 'FileReader' in window; }],
+      ['MediaCapabilities API', function(){ return 'mediaCapabilities' in navigator; }],
+      ['Content Indexing (navigator.storage?.estimate)', function(){ return 'storage' in navigator && 'estimate' in navigator.storage; }],
+      ['Service Worker Sync (SyncManager)', function(){ return 'SyncManager' in window; }],
+      ['WebGL debug renderer info (WEBGL_debug_renderer_info)', function(){ try{ var c=document.createElement('canvas'); var gl=c.getContext('webgl')||c.getContext('experimental-webgl'); return !!(gl && gl.getExtension && gl.getExtension('WEBGL_debug_renderer_info')); }catch(e){return false;} }]
+    ];
+
+    function runAll(){
+      tbody.innerHTML = '';
+      for(var i=0;i<tests.length;i++){
+        (function(t){
+          var name = t[0];
+          var fn = t[1];
+          try{
+            var val = fn();
+            if(val && typeof val.then === 'function'){
+              (function(n, p){
+                p.then(function(res){
+                  row(n, !!res, typeof res === 'string' ? res : '');
+                }).catch(function(e){
+                  row(n, false, e && e.message ? e.message : String(e));
+                  console.error('Async test failed:', n, e && e.stack ? e.stack : e);
+                });
+              })(name, val);
+              return;
+            }
+            row(name, !!val, typeof val === 'string' ? val : '');
+          }catch(e){
+            row(name, false, e && e.message ? e.message : String(e));
+            console.error('Test threw:', name, e && e.stack ? e.stack : e);
+          }
+        })(tests[i]);
+      }
+
+      // Notification permission (sync)
+      if('Notification' in window){
+        try{ row('Notification permission', Notification.permission === 'granted' ? true : Notification.permission === 'denied' ? false : null, 'permission: ' + Notification.permission); }catch(e){ row('Notification permission', false, e && e.message ? e.message : String(e)); }
+      }
+
+      // Battery (async/promise)
+      if('getBattery' in navigator){
+        try{
+          var battP = navigator.getBattery();
+          if(battP && typeof battP.then === 'function'){
+            battP.then(function(batt){ row('Battery API details', true, 'charging: ' + batt.charging + ' level:' + batt.level); })
+                 .catch(function(e){ row('Battery API details', false, e && e.message ? e.message : String(e)); console.error('Battery API error', e && e.stack ? e.stack : e); });
+          }
+        }catch(e){ row('Battery API details', false, e && e.message ? e.message : String(e)); console.error('Battery API error', e && e.stack ? e.stack : e); }
+      }
+
+      // enumerateDevices (async)
+      if('mediaDevices' in navigator && 'enumerateDevices' in navigator.mediaDevices){
+        try{
+          var devP = navigator.mediaDevices.enumerateDevices();
+          if(devP && typeof devP.then === 'function'){
+            devP.then(function(devices){ row('enumerateDevices', true, 'found: ' + devices.length); })
+                .catch(function(e){ row('enumerateDevices', false, e && e.message ? e.message : String(e)); console.error('enumerateDevices error', e && e.stack ? e.stack : e); });
+          }
+        }catch(e){ row('enumerateDevices', false, e && e.message ? e.message : String(e)); console.error('enumerateDevices error', e && e.stack ? e.stack : e); }
+      }
+
+      // Service worker presence
+      if('serviceWorker' in navigator){ try{ row('Service Worker scope (registration possible on secure origin only)', true); }catch(e){} }
+
+      // WebAssembly presence
+      try{ if(typeof WebAssembly !== 'undefined'){ row('WebAssembly: validate instantiation', true); } }catch(e){}
+
+      // Add summary after brief delay to allow async checks to finish
+      setTimeout(function(){
+        try{
+          var okCount = tbody.querySelectorAll('td:nth-child(2) .ok').length;
+          var total = tbody.querySelectorAll('tr').length;
+          var summary = document.createElement('tr');
+          var s1 = document.createElement('td'); s1.textContent = 'Summary';
+          var s2 = document.createElement('td'); s2.colSpan = 2; s2.innerHTML = '上述测试中 ' + okCount + ' 个功能可用，共 ' + total + ' 个功能';
+          summary.appendChild(s1); summary.appendChild(s2);
+          tbody.appendChild(summary);
+        }catch(e){ console.error('Summary error', e && e.stack ? e.stack : e); }
+      }, 700);
+    }
+
+    // Auto-run immediately (fallback to load)
+    try{ runAll(); }catch(e){ window.addEventListener('load', runAll); }
+  </script>
+</body>
+</html>
