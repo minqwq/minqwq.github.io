@@ -1,2 +1,2 @@
-# homepage-v2
-v2.0 series of my homepage~
+$ This repostiory is moved to
+https://codeberg.org/minqwq/pages
